@@ -24,5 +24,9 @@ Route::get('/staff', App\Livewire\Staff::class)->name('page.staff');
 Route::get('/cloths/style', App\Livewire\Style::class)->name('page.style');
 
 Route::get('/setting', App\Livewire\Setting::class)->name('page.setting');
+Route::get('/login', App\Livewire\LoginPage::class)->name('page.login');
+
+
+
 
 

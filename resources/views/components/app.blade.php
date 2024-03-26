@@ -29,20 +29,22 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-
+        @if(!Route::is('page.login') )
+        // true
+        
        <livewire:partials.topbar />
 
         <!-- ========== Left Sidebar Start ========== -->
         <livewire:partials.left-sidebar />
         <!-- Left Sidebar End -->
 
-
+        
 
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <!-- start main content-->
-        {{$slot}}
+       
         <!-- end main content-->
 
     </div>
@@ -56,7 +58,9 @@
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
-
+@else
+ {{$slot}}
+@endif
     <!-- JAVASCRIPT -->
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }} "></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
