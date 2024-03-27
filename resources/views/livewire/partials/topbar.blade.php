@@ -75,7 +75,7 @@
                     {{-- <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">پروفایل وګورئ</span></a> --}}
                     <a class="dropdown-item d-block" href="{{ route('page.setting') }}"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">ترتیبات</span></a>
                     <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">صفحه بنده کړه</span></a>
-                    <a class="dropdown-item" href="#"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">وتون</span></a>
+                    <a  class="dropdown-item" wire:click.prevent='logout' href="#"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle" >وتون</span></a>
                 </div>
             </div>
 

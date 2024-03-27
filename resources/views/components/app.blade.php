@@ -12,55 +12,51 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     @yield('customStyle')
     <!-- Bootstrap Css -->
-    <link href="{{ asset('assets/css/bootstrap-rtl.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap-rtl.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
     <!-- Icons Css -->
     <link href="{{ asset('assets/css/icons.min.css') }} " rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('assets/css/app-rtl.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-   
+
 </head>
 
 
 <body class="" data-sidebar-size="sm ">
 
     <!-- <body data-layout="horizontal" data-topbar="colored"> -->
-<!-- Loader -->
+    <!-- Loader -->
     {{-- <livewire:partials.preloader /> --}}
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @if(!Route::is('page.login') )
-        // true
-        
-       <livewire:partials.topbar />
-
-        <!-- ========== Left Sidebar Start ========== -->
-        <livewire:partials.left-sidebar />
-        <!-- Left Sidebar End -->
-
-        
-
+        @if (!Route::is('login'))
+            <livewire:partials.topbar />
+            <!-- ========== Left Sidebar Start ========== -->
+            <livewire:partials.left-sidebar />
+            <!-- Left Sidebar End -->
+        @endif
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <!-- start main content-->
-       
+        {{ $slot }}
         <!-- end main content-->
 
     </div>
     <!-- END layout-wrapper -->
 
 
+    @if (!Route::is('login'))
+        <livewire:partials.rigth-sidebar />
+        <!-- /Right-bar -->
 
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+    @endif
     <!-- Right Sidebar -->
-    <livewire:partials.rigth-sidebar />
-    <!-- /Right-bar -->
 
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
-@else
- {{$slot}}
-@endif
+
     <!-- JAVASCRIPT -->
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }} "></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
@@ -70,14 +66,16 @@
     <script src="{{ asset('assets/libs/waypoints/lib/jquery.waypoints.min.js') }} "></script>
     <script src="{{ asset('assets/libs/jquery.counterup/jquery.counterup.min.js') }} "></script>
     <script src="{{ asset('assets/libs/chart.js/Chart.bundle.min.js') }} "></script>
-    
+
     @yield('customJS')
-
+    @if (!Route::is('login'))
+        <script src="{{ asset('assets/js/app.js') }} "></script>
+    @endif
     <!-- App js -->
-    <script src="{{ asset('assets/js/app.js') }} "></script>
-
-
     
+
+
+
 </body>
 
 </html>
