@@ -18,11 +18,17 @@
     <link href="{{ asset('assets/css/icons.min.css') }} " rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('assets/css/app-rtl.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }} "></script>
+    @livewireStyles
+
 
 </head>
 
 
-<body class="" data-sidebar-size="sm ">
+<body class="" data-sidebar-size="{{ App\Models\Setting::all()->first()['sidbarSize'] }}"
+    data-bs-theme="{{ App\Models\Setting::all()->first()['layoutMode'] }}"
+    data-topbar="{{ App\Models\Setting::all()->first()['tapbarColor'] }}"
+    data-sidebar="{{ App\Models\Setting::all()->first()['sidebarColor'] }}">
 
     <!-- <body data-layout="horizontal" data-topbar="colored"> -->
     <!-- Loader -->
@@ -58,24 +64,15 @@
 
 
     <!-- JAVASCRIPT -->
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }} "></script>
+    @livewireScripts
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
-    <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }} "></script>
-    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }} "></script>
+    {{-- <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }} "></script> --}}
+    {{-- <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }} "></script> --}}
     <script src="{{ asset('assets/libs/node-waves/waves.min.js') }} "></script>
-    <script src="{{ asset('assets/libs/waypoints/lib/jquery.waypoints.min.js') }} "></script>
-    <script src="{{ asset('assets/libs/jquery.counterup/jquery.counterup.min.js') }} "></script>
+    {{-- <script src="{{ asset('assets/libs/waypoints/lib/jquery.waypoints.min.js') }} "></script> --}}
+    {{-- <script src="{{ asset('assets/libs/jquery.counterup/jquery.counterup.min.js') }} "></script> --}}
     <script src="{{ asset('assets/libs/chart.js/Chart.bundle.min.js') }} "></script>
-
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     @yield('customJS')
-    @if (!Route::is('login'))
-        <script src="{{ asset('assets/js/app.js') }} "></script>
-    @endif
-    <!-- App js -->
-    
-
-
-
-</body>
 
 </html>

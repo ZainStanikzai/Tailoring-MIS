@@ -1,5 +1,7 @@
 <div class="main-content">
 
+
+
     <div class="page-content">
         <div class="container-fluid">
 
@@ -33,27 +35,75 @@
                                     </label>
                                     <input type="file" id="setting_image" class="hidden">
                                 </div>
-                                <h5 class="mt-1 mb-1">زین</h5>
                             </div>
 
-                            <hr class="my-4">
+                            @if (session('error'))
+                                <div class="text-danger text-center" dir="ltr">{{ session('error') }} </div>
+                            @endif
+                            @if (session('success'))
+                                <div class="position-fixed top-0 start-0 p-3 " style="z-index:9999">
+                                    <div id="liveToast" class="toast fade show " role="alert" aria-live="assertive"
+                                        aria-atomic="true">
+                                        <div class="toast-header bg-success text-light">
+                                            <img src="assets/images/logo-sm.png" alt="" class="me-2"
+                                                height="18">
+                                            <strong class="me-auto">Muzammel Mustafa Tailoring</strong>
+                                            <small class="text-muted">just now</small>
+                                            <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="toast-body">
+                                            {{ session('success') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
 
                             <div class="text-muted">
-                                <div class="table-responsive mt-4">
+                                <div class="table-responsive mt-1">
                                     <div>
                                         <label for="setting.name">نوم</label>
-                                        <input type="text" class="form-control text-start"
-                                            placeholder="خپل نوم ولیکی..." value="زین الله">
+                                        <input wire:model='name' type="text" class="form-control text-start"
+                                            placeholder="خپل نوم ولیکی..." value="">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="mt-4">
                                         <label for="setting.name">مبایل شمیره</label>
-                                        <input type="number" class="form-control text-start"
-                                            placeholder="...خپل مبایل شمیره ولیکی" value="02932399">
+                                        <input wire:model='phone' type="text" dir="ltr"
+                                            class="form-control text-start" placeholder="...خپل مبایل شمیره ولیکی"
+                                            value="">
+                                        @error('phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="mt-4">
                                         <label for="setting.name">ادرس</label>
-                                        <input type="text" class="form-control text-start"
+                                        <input wire:model='address' type="text" class="form-control text-start"
                                             placeholder="خپل ادرس ولیکی..." value="">
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mt-4">
+                                        <label for="setting.name">یوزرنم</label>
+                                        <input wire:model='username' type="text" class="form-control text-start"
+                                            placeholder="خپل یوزرنم ولیکی..." value="">
+                                        @error('username')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="button" class="btn btn-primary"
+                                            wire:click='update({{ Auth::user()->id }})'>
+                                            <div class="">
+                                                ذخیره یی کړی
+                                                <span wire:loading
+                                                    class="spinner spinner-border spinner-border-sm"></span>
+                                            </div>
+                                        </button>
                                     </div>
 
                                 </div>
@@ -63,68 +113,7 @@
                 </div>
 
                 <div class="col-xl-8 h-100">
-                    <div class="card mb-0 h-100 ">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
-                            {{-- <li class="nav-item">
-                                <a class="nav-link " data-bs-toggle="tab" href="#backup" role="tab">
-                                    <i class="uil uil-clipboard-notes font-size-20"></i>
-                                    <span class="d-none d-sm-block">بک اپ</span>
-                                </a>
-                            </li> --}}
-                            <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#password" role="tab">
-                                    <i class="uil uil-lock-alt font-size-20"></i>
-                                    <span class="d-none d-sm-block">پټ نوم</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- Tab content -->
-                        <div class="tab-content p-4 h-100">
-                            {{-- <div class="tab-pane h-100" id="backup" role="tabpanel">
-                                <div class="h-100 align-items-stretch">
-                                    <div class="d-flex align-items-center flex-column justify-content-center h-100">
-                                        <div class="btn btn-primary">
-                                            BACKUP THE DATABASE <i class="uil-file-copy-alt"></i>
-                                        </div>
-                                        <div class="btn btn-primary">
-                                            RESTORE DATABASE <i class="uil-history-alt"></i>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class=""></div>
-                                </div>
-                            </div> --}}
-                            <div class="tab-pane active" id="password" role="tabpanel">
-                                <div class="row  d-flex justify-content-center">
-                                    <form class="col-md-6">
-                                        <div class="mt-4">
-                                            <label for="setting.name">زوړ پټ نوم</label>
-                                            <input type="password" autocomplete="false" required
-                                                class="form-control text-start" placeholder="خپل زوړ پټ نوم ولیکی..."
-                                                value="">
-                                        </div>
-                                        <div class="mt-4">
-                                            <label for="setting.name">نوی پټ نوم</label>
-                                            <input type="password" class="form-control text-start"
-                                                placeholder="خپل نوی پټ نوم ولیکی..." required value="">
-                                        </div>
-                                        <div class="mt-4">
-                                            <label for="setting.name">بیاځلی</label>
-                                            <input type="password" class="form-control text-start"
-                                                placeholder="خپل نوی پټ نوم بیاځلی ولیکی..." required value="">
-                                        </div>
-                                        <div class="mt-4">
-                                            <input type="submit" class="btn btn-primary" value="ذخیره یی کړی">
-                                        </div>
-
-                                    </form>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
+                    <livewire:change-password />
                 </div>
             </div>
             <!-- end row -->
