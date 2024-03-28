@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/', App\Livewire\Index::class)->name('home');
     Route::get('/cloths', App\Livewire\ClothBill::class)->name('bill.cloths');
     Route::get('/vaskate', App\Livewire\VaskatBill::class)->name('bill.vaskate');

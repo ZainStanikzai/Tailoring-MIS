@@ -22,7 +22,7 @@
                 </a>
             </div>
 
-            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+            <button type="button" onclick="document.body.setAttribute('data-sidebar-size','lg')" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
                 <i class="fa fa-fw fa-bars"></i>
             </button>
 
@@ -55,15 +55,6 @@
                     </form>
                 </div>
             </div>
-
-           
-
-            <div class="dropdown d-none d-lg-inline-block ms-1">
-                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                    <i class="uil-minus-path"></i>
-                </button>
-            </div>
-
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-4.jpg') }}" alt="Header Avatar">
@@ -87,4 +78,17 @@
 
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $(".uil-cog").click(function (e) { 
+                e.preventDefault();
+                $('body').addClass('right-bar-enabled');
+            });
+           
+            $(".fa-bars").click(function (e) { 
+                e.preventDefault();
+                $('body').addClass('sidebar-enable');
+            });
+        });
+    </script>
 </header>

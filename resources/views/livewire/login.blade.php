@@ -22,7 +22,7 @@
 
                                 <div class="mb-3" dir="ltr">
                                     <label class="form-label" for="username">Username</label>
-                                    <input wire:model="username" name="username" type="text" class="form-control"
+                                    <input wire:model="username" name="username" type="text" class="form-control text-right"
                                         dir="rtl" id="username" placeholder="Enter username">
                                     @error('username')
                                         <span class="error">{{ $message }}</span>
@@ -42,13 +42,9 @@
                                    
                                     <button class="btn btn-primary w-sm waves-effect waves-light" type="submit">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <span class="spinner spinner-border spinner-border-sm" wire:loading  ></span>Login 
+                                            <span class="spinner spinner-border spinner-border-sm" wire:loading ></span>Login 
                                         </div>
-                                       
                                     </button>
-                                    
-
-                                    
                                 </div>
                             </form>
                         </div>
