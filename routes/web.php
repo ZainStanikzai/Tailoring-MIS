@@ -23,7 +23,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/tshirt', App\Livewire\TshirtBill::class)->name('bill.tshirt');
     Route::get('/customers', App\Livewire\Customer::class)->name('page.customer');
     Route::get('/staff', App\Livewire\Staff::class)->name('page.staff');
+    Route::get('/staffDelete', [App\Http\Controllers\deleteStaff::class,"deleteStaff"])->name('page.staff.delete');
     Route::get('/cloths/style', App\Livewire\Style::class)->name('page.style');
+    Route::get('/staff/{id}', App\Livewire\StaffShowAllCloth::class)->name('staff.details');
+
 
     Route::get('/setting', App\Livewire\Setting::class)->name('page.setting');
 });

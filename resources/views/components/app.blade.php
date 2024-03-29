@@ -19,6 +19,7 @@
     <!-- App Css-->
     <link href="{{ asset('assets/css/app-rtl.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }} "></script>
+    
     @livewireStyles
 
 
@@ -73,6 +74,8 @@
     {{-- <script src="{{ asset('assets/libs/jquery.counterup/jquery.counterup.min.js') }} "></script> --}}
     <script src="{{ asset('assets/libs/chart.js/Chart.bundle.min.js') }} "></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+  
     @yield('customJS')
+    
 
 </html>
