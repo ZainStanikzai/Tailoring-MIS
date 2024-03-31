@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sleeve_style', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('clothing_id');
-            $table->string('name');
+            $table->unsignedBigInteger('sleeve_id');
             $table->timestamps();
         });
     }

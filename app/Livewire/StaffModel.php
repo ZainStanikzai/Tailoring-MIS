@@ -39,7 +39,7 @@ class StaffModel extends Component
         } catch (Exception $ex) {
             session()->flash('error', $ex);
         }
-        $this->reset();
+        // $this->reset();
         $this->dispatch('staffCreated', id:$newStaff->id,name:$newStaff->name,phone:$newStaff->phone,created_at:$newStaff->created_at);
     }
     

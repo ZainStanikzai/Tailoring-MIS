@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Setting::create([
             'icon' => 'null',
-            'layoutMode' => 'Light',
-            'tapbarColor' => 'Light',
-            'sidbarSize'=>'Small',
-            'sidebarColor' => 'Light',
+            'layoutMode' => 'light',
+            'tapbarColor' => 'light',
+            'sidbarSize'=>'small',
+            'sidebarColor' => 'light',
         ]);
         
         
