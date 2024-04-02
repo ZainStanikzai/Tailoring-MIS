@@ -81,6 +81,15 @@ class VaskatBill extends Component
         $this->query = $term;
         $this->resetPage();
     }
+
+    public $filter = "all";
+    public function showFilter($State){
+        $this->filter = $State;
+        $this->resetPage();
+
+    }
+
+
     public function creatVasket(){
 
         $this->modelClass = "show";
@@ -103,6 +112,7 @@ class VaskatBill extends Component
                 "rakht"=>$this->rakht,
                 "qty" => $this->qty,
                 "paid" =>$this->paid,
+                "balance" =>(($this->price * $this->qty)+$this->rakht)-$this->paid,
                 "sewDate"=>$this->sewDate,
                 "status"=>"new",
                 "sewStatus"=>"0",
@@ -163,8 +173,20 @@ class VaskatBill extends Component
     }
     public function render()
     {
-        return view('livewire.vaskat-bill',[
-            'Vaskates'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->latest()->paginate(10)
-        ]);
+        if($this->filter == "Qarze"){
+            return view('livewire.vaskat-bill',[
+                'Vaskates'=>Vaskates::where("balance","<>","0")->latest()->paginate(50),
+                'totalRecord'=>Vaskates::where("balance","<>","0")->count(),
+                'totalCash' => Vaskates::where("balance","<>","0")->sum('paid'),
+                'totalBalance'=>Vaskates::where("balance","<>","0")->sum('balance')
+            ]);
+        }else{
+            return view('livewire.vaskat-bill',[
+                'Vaskates'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->latest()->paginate(50),
+                'totalRecord'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->count(),
+                'totalCash' => Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->sum('paid'),
+                'totalBalance'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->sum('balance')
+            ]);
+        }
     }
 }

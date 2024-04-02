@@ -42,6 +42,7 @@ class Vaskates extends Model
         'price',
         'qty',
         'paid',
+        'balance',
         'rakht',
         'sewDate',
         'status',

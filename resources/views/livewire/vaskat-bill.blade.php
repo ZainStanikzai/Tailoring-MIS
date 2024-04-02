@@ -64,7 +64,7 @@
             </div>
             <!-- end page title -->
             <div class="row">
-                <div class="col-md-12 col-sm-12col-12">
+                <div class="col-md-12 col-sm-12 col-12">
                     <div class="card">
                         <div class="clothPageActionBtn d-flex align-items-center justify-content-between">
                             <button type="button" class="btn btn-primary waves-effect waves-light mt-2 mx-2"
@@ -72,16 +72,41 @@
                                 نوی بیل جوړ کړی <i class="uil-book-medical"></i>
                             </button>
 
-                            <form class="mx-3">
-                                <div class="d-flex align-items-center">
+                            <div class="mx-3 ">
+                                <div class="d-flex align-items-center ">
+                                    <div class="d-flex align-items-ce justify-content-center text-muted">
+                                        <div class="d-flex align-items-baseline justify-content-center mx-2 p-0 m-0">قرض:{{$totalBalance}}</div> 
+                                        <div class="d-flex align-items-baseline justify-content-center mx-2 p-0 m-0">نقد:{{$totalCash}}</div> 
+                                        <div class="d-flex align-items-baseline justify-content-center mx-2 p-0 m-0">ټولی+پیسی:{{$totalBalance+$totalCash}}</div> 
+                                        <div class="d-flex align-items-baseline justify-content-center mx-2 p-0 m-0">ټول+فرمایشونه:{{$totalRecord}}</div>
+                                        {{-- <i class="uil-cloud-database-tree font-size-24  px-2"></i> --}}
+                                    </div>
+                                    <div class="filter" wire:ignore>
+                                        <div class="dropdown open">
+                                            <i
+                                                class="uil-filter btn m-0 p-0 font-size-24  px-2 dropdown-toggle"
+                                                type="button"
+                                                id="triggerId"
+                                                data-bs-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
+                                        </i>
+                                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                                    <button  wire:click='showFilter("all")' class="dropdown-item ">ټول</button>
+                                                    <button wire:click='showFilter("Qarze")' class="dropdown-item ">قرضداران</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <i class="p-0 m-0 btn">
                                         <i class="uil-search font-size-24  px-2 "></i>
                                     </i>
                                     <input dir="ltr" wire:keyup.prevent='search($event.target.value)'
-                                        type="search" placeholder="...و پلټی" name="" class="form-control"
+                                        type="text" placeholder="...و پلټی" name="" class="form-control"
                                         id="">
                                 </div>
-                            </form>
+                                
+                            </div>
 
                         </div>
 
@@ -131,58 +156,6 @@
                                                         </div>
                                                         <div class="py-2">
                                                             <form id="formAddVasket" wire:submit='creatVasket'>
-                                                                {{-- @if (session('success'))
-                                                                    <div class="position-fixed top-0 start-0 p-3 "
-                                                                        style="z-index:9999">
-                                                                        <div id="liveToast" class="toast fade show "
-                                                                            role="alert" aria-live="assertive"
-                                                                            aria-atomic="true">
-                                                                            <div
-                                                                                class="toast-header bg-success text-light">
-                                                                                <img src="assets/images/logo-sm.png"
-                                                                                    alt="" class="me-2"
-                                                                                    height="18">
-                                                                                <strong class="me-auto">Muzammel
-                                                                                    Mustafa Tailoring</strong>
-                                                                                <small class="text-muted">just
-                                                                                    now</small>
-                                                                                <button type="button"
-                                                                                    class="btn-close"
-                                                                                    data-bs-dismiss="toast"
-                                                                                    aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="toast-body">
-                                                                                {{ session('success') }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                                @if (session('error'))
-                                                                    <div class="position-fixed top-0 start-0 p-3 "
-                                                                        style="z-index:9999">
-                                                                        <div id="liveToast" class="toast fade show "
-                                                                            role="alert" aria-live="assertive"
-                                                                            aria-atomic="true">
-                                                                            <div
-                                                                                class="toast-header bg-danger text-light">
-                                                                                <img src="assets/images/logo-sm.png"
-                                                                                    alt="" class="me-2"
-                                                                                    height="18">
-                                                                                <strong class="me-auto">Muzammel
-                                                                                    Mustafa Tailoring</strong>
-                                                                                <small class="text-muted">just
-                                                                                    now</small>
-                                                                                <button type="button"
-                                                                                    class="btn-close"
-                                                                                    data-bs-dismiss="toast"
-                                                                                    aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="toast-body">
-                                                                                {{ session('error') }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif --}}
                                                                 <div style="left:-22px;top:20px"
                                                                     class="mt-4 position-absolute  d-flex align-items-baseline justify-content-end">
                                                                     <h5 class="font-size-16 mb-1">انتها تاریخ </h5>
@@ -487,7 +460,7 @@
                                             <td>{{ $vasket->rakht }}</td>
                                             <td>{{ $vasket->price * $vasket->qty + $vasket->rakht }}</td>
                                             <td>{{ $vasket->paid }}</td>
-                                            <td>{{ $vasket->price * $vasket->qty + $vasket->rakht - $vasket->paid }}
+                                            <td class="{{$vasket->balance != '0'?'text-danger':''}}">{{ $vasket->balance}}
                                             </td>
                                             <td class="text-center">
                                                 <i class="uil-newspaper font-size-20 text-primary mx-1"
@@ -538,6 +511,7 @@
                     window.addEventListener("newVasketeAdded", event => {
                         $('#formAddVasket')[0].reset();
                         $("#addnewBill").modal("hide");
+                        $(".modal-backdrop").addClass("d-none");
                     })
                 });
             </script>

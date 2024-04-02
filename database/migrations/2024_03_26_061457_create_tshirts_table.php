@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('price');
             $table->smallInteger('qty');
             $table->integer('paid');
+            $table->integer('balance')->default(0);
             $table->string('status');
             $table->string('sewStatus');
             $table->string('description');

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('rakht')->default(0);
             $table->integer('qty');
             $table->integer('paid')->default(0);
+            $table->integer('balance')->default(0);
             $table->date('sewDate')->default(date('Y/m/d'));
             $table->string('status');
             $table->string('sewStatus');

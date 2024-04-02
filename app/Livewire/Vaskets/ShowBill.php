@@ -131,6 +131,7 @@ class ShowBill extends Component
         $vasket->rakht = $this->rakht;
         $vasket->qty = $this->qty;
         $vasket->paid =$this->paid;
+        $vasket->balance = (($this->price * $this->qty)+$this->rakht)-$this->paid;
         $vasket->description = $this->description;
         if($this->neckStyle_id != null){
             $vasket->NeckContainer[0]->neck_id = $this->neckStyle_id;
