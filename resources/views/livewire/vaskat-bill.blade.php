@@ -137,20 +137,18 @@
                                                                 <h5 class="font-size-16 mb-1">رسید تاریخ </h5>
                                                                 <span>{{ date('m/d/Y') }}</span>
                                                             </div>
-                                                            <div style="left: 10px;top:0"
-                                                                class="text-bold position-absolute bg-light">NO:
-                                                                {{ $vasketLastID }}
-                                                            </div>
                                                             <div class="mb-1">
-                                                                <img src="assets/images/logo-dark.png" alt="logo"
-                                                                    height="20" class="logo-dark" />
-                                                                <img src="assets/images/logo-light.png" alt="logo"
-                                                                    height="20" class="logo-light" />
+                                                                <img src="assets/images/logo-dark.png" alt="logo" height="20"
+                                                                    class="logo-dark" />
+                                                                <img src="assets/images/logo-light.png" alt="logo" height="20"
+                                                                    class="logo-light" />
                                                             </div>
                                                             <div class="text-muted">
-                                                                <p class="mb-1">پته: {{ Auth::user()->address }}</p>
-                                                                <p><i
-                                                                        class="uil uil-phone me-1"></i>{{ Auth::user()->phone }}
+                                                                <p class="mb-1">پته:{{ Auth::user()->address }}</p>
+                                                                <p><i class="uil uil-phone me-1"></i>
+                                                                    <span dir="ltr">{{ Auth::user()->phone }}</span>
+                                                                    <i class="me-1"></i>
+                                                                    مسول:{{ Auth::user()->name }}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -455,7 +453,7 @@
                                             <td>{{ $vasket->id }}</td>
                                             <td>{{ $vasket->customer_name }}</td>
                                             <td>{{ $vasket->customer_number }}</td>
-                                            <td>{{ $vasket->date }}</td>
+                                            <td>{{ $vasket->sewDate }}</td>
                                             <td>{{ $vasket->price }}</td>
                                             <td>{{ $vasket->rakht }}</td>
                                             <td>{{ $vasket->price * $vasket->qty + $vasket->rakht }}</td>
