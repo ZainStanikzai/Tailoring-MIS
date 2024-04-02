@@ -169,6 +169,7 @@
                 });
                $("#addnewBill").modal('hide');
                addIdToFormSalary();
+               $(".modal-backdrop").hide();
             //    delete staff
             editeStaff();
            let stafID = 0;

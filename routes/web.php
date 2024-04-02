@@ -1,5 +1,13 @@
 <?php
 
+use App\Models\Customer;
+use App\Models\Neck;
+use App\Models\NeckStyleContainer;
+use App\Models\shoulder;
+use App\Models\ShoulderStyleContainer;
+use App\Models\Skirt;
+use App\Models\SkirtStyleContainer;
+use App\Models\Vaskates;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +40,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/login', App\Livewire\Login::class)->name('login')->middleware('guest');
+
+
+Route::get("/test" , function(){
+    $v  = Vaskates::find(2);
+
+
+    $v->Customer->name = "qasaab";
+        return $v->Customer;
+    
+    
+ 
+});

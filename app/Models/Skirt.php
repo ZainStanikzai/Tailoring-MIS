@@ -9,6 +9,9 @@ class Skirt extends Model
 {
 
     protected $table = "Skirt";
+    protected function SKirtStyleContainer(){
+        return $this->hasMany(SkirtStyleContainer::class);
+    }
     protected $fillable = ['name','clothing_type'];
     use HasFactory;
 }

@@ -1,15 +1,47 @@
 @section('customStyle')
-    <!-- DataTables -->
-    <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} " rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <!-- Responsive datatable examples -->
-    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }} " rel="stylesheet" type="text/css" />
+
+    <script>
+    var showVaketInfoID,modelStatus;
+        function showBill(id,state) {
+            modelStatus =state; 
+            showVasketInfoID = id;
+            // alert();
+            $("#showBillD").modal("show");
+        }
+    </script>
 @endsection
 <div class="main-content">
-
+    @if (session('success'))
+        <div class="position-fixed top-0 start-0 p-3 " style="z-index:9999">
+            <div id="liveToast" class="toast fade show " role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-success text-light">
+                    <img src="assets/images/logo-sm.png" alt="" class="me-2" height="18">
+                    <strong class="me-auto">Muzammel Mustafa Tailoring</strong>
+                    <small class="text-muted">just now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="position-fixed top-0 start-0 p-3 " style="z-index:9999">
+            <div id="liveToast" class="toast fade show " role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-danger text-light">
+                    <img src="assets/images/logo-sm.png" alt="" class="me-2" height="18">
+                    <strong class="me-auto">Muzammel Mustafa Tailoring</strong>
+                    <small class="text-muted">just now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ session('error') }}
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="page-content">
         <div class="container-fluid">
@@ -34,18 +66,36 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12col-12">
                     <div class="card">
-                        <div class="clothPageActionBtn">
-                            <button type="button" class="btn btn-primary waves-effect waves-light mt-2"
+                        <div class="clothPageActionBtn d-flex align-items-center justify-content-between">
+                            <button type="button" class="btn btn-primary waves-effect waves-light mt-2 mx-2"
                                 data-bs-toggle="modal" data-bs-target="#addnewBill">
                                 نوی بیل جوړ کړی <i class="uil-book-medical"></i>
                             </button>
+
+                            <form class="mx-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="p-0 m-0 btn">
+                                        <i class="uil-search font-size-24  px-2 "></i>
+                                    </i>
+                                    <input dir="ltr" wire:keyup.prevent='search($event.target.value)'
+                                        type="search" placeholder="...و پلټی" name="" class="form-control"
+                                        id="">
+                                </div>
+                            </form>
+
                         </div>
+
                         <!-- add new Bill Modal example -->
-                        <div class="modal fade " id="addnewBill" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        {{-- show bill --}}
+                        <livewire:vaskets.showBill />
+                        {{-- end   --}}
+                        <div class="modal fade {{ $modelClass }}" style="{{ $modelStyle }}" id="addnewBill"
+                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog"
+                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
+
                                         <h5 class="modal-title" id="staticBackdropLabel">د نوی بیل معلومات ولیکی</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close">
@@ -64,16 +114,8 @@
                                                             </div>
                                                             <div style="left: 10px;top:0"
                                                                 class="text-bold position-absolute bg-light">NO:
-                                                                2011
+                                                                {{ $vasketLastID }}
                                                             </div>
-                                                            <div style="left:-22px;top:20px"
-                                                                class="mt-4 position-absolute  d-flex align-items-baseline justify-content-end">
-                                                                <h5 class="font-size-16 mb-1">انتها تاریخ </h5>
-                                                                <input type="date" value="{{ date('m/d/Y') }}"
-                                                                    class="border-0 bg-transparent shadow-none"
-                                                                    name="" id="">
-                                                            </div>
-                                                           
                                                             <div class="mb-1">
                                                                 <img src="assets/images/logo-dark.png" alt="logo"
                                                                     height="20" class="logo-dark" />
@@ -81,64 +123,127 @@
                                                                     height="20" class="logo-light" />
                                                             </div>
                                                             <div class="text-muted">
-                                                                <p class="mb-1">پته: کارت نو د پشتون مارکیت مخاخ,کابل
-                                                                    افغانستان.</p>
-                                                                <p><i class="uil uil-phone me-1"></i> 012-345-6789</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 col-sm-12 col-12">
-                                                                <div class="text-muted">
-                                                                    <form action="">
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 col-sm-6 col-6">
-                                                                                <div class="mb-1">
-                                                                                    <div
-                                                                                        class="d-flex align-items-baseline ">
-                                                                                        <label class="form-label"
-                                                                                            style="width: 40px"
-                                                                                            for="validationCustom01">نوم</label>
-                                                                                        <input type="text"
-                                                                                            min="1"
-                                                                                            max="150"
-                                                                                            class="form-control border w-100"
-                                                                                            id="validationCustom01"
-                                                                                            placeholder="د مشتری نوم"
-                                                                                            required>
-                                                                                    </div>
-                                                                                    <div class="valid-feedback">
-                                                                                        Looks good!
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6 col-sm-6 col-6">
-                                                                                <div class="mb-1">
-                                                                                    <div
-                                                                                        class="d-flex align-items-baseline ">
-                                                                                        <label class="form-label"
-                                                                                            style="width: 40px"
-                                                                                            for="validationCustom01">مبایل</label>
-                                                                                        <input type="number"
-                                                                                            min="1"
-                                                                                            max="150"
-                                                                                            class="form-control border w-100"
-                                                                                            id="validationCustom01"
-                                                                                            placeholder="د مشتری مبایل شمیره"
-                                                                                            required>
-                                                                                    </div>
-                                                                                    <div class="valid-feedback">
-                                                                                        Looks good!
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
+                                                                <p class="mb-1">پته: {{ Auth::user()->address }}</p>
+                                                                <p><i
+                                                                        class="uil uil-phone me-1"></i>{{ Auth::user()->phone }}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div class="py-2">
-                                                            <form action="">
-                                                                <div class="row">
+                                                            <form id="formAddVasket" wire:submit='creatVasket'>
+                                                                {{-- @if (session('success'))
+                                                                    <div class="position-fixed top-0 start-0 p-3 "
+                                                                        style="z-index:9999">
+                                                                        <div id="liveToast" class="toast fade show "
+                                                                            role="alert" aria-live="assertive"
+                                                                            aria-atomic="true">
+                                                                            <div
+                                                                                class="toast-header bg-success text-light">
+                                                                                <img src="assets/images/logo-sm.png"
+                                                                                    alt="" class="me-2"
+                                                                                    height="18">
+                                                                                <strong class="me-auto">Muzammel
+                                                                                    Mustafa Tailoring</strong>
+                                                                                <small class="text-muted">just
+                                                                                    now</small>
+                                                                                <button type="button"
+                                                                                    class="btn-close"
+                                                                                    data-bs-dismiss="toast"
+                                                                                    aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="toast-body">
+                                                                                {{ session('success') }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                                @if (session('error'))
+                                                                    <div class="position-fixed top-0 start-0 p-3 "
+                                                                        style="z-index:9999">
+                                                                        <div id="liveToast" class="toast fade show "
+                                                                            role="alert" aria-live="assertive"
+                                                                            aria-atomic="true">
+                                                                            <div
+                                                                                class="toast-header bg-danger text-light">
+                                                                                <img src="assets/images/logo-sm.png"
+                                                                                    alt="" class="me-2"
+                                                                                    height="18">
+                                                                                <strong class="me-auto">Muzammel
+                                                                                    Mustafa Tailoring</strong>
+                                                                                <small class="text-muted">just
+                                                                                    now</small>
+                                                                                <button type="button"
+                                                                                    class="btn-close"
+                                                                                    data-bs-dismiss="toast"
+                                                                                    aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="toast-body">
+                                                                                {{ session('error') }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif --}}
+                                                                <div style="left:-22px;top:20px"
+                                                                    class="mt-4 position-absolute  d-flex align-items-baseline justify-content-end">
+                                                                    <h5 class="font-size-16 mb-1">انتها تاریخ </h5>
+                                                                    <input type="date"
+                                                                        class="border-0 bg-transparent shadow-none"
+                                                                        name="" wire:model='sewDate'
+                                                                        id="date" required>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline col-sm-5 col-4 position-absolute "
+                                                                    style="left: 10px; top:70px">
+                                                                    <label class="form-label me-2" style=""
+                                                                        for="validationCustom02">
+                                                                        {{ $staff_id }}خیاط</label>
+                                                                    <select name=""
+                                                                        class="w-100 border border-1 bg-transparent"
+                                                                        id="selectStaff" wire:model='staff_id'
+                                                                        required>
+                                                                        <option value="-1"></option>
+                                                                        @foreach ($staffs as $staff)
+                                                                            <option value="{{ $staff->id }}">
+                                                                                {{ $staff->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('staff_id')
+                                                                        <span
+                                                                            class="text-danger feedBackError">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="row mb-2">
+                                                                    <div class="col-md-6 col-sm-6 col-6">
+                                                                        <div class="mb-1">
+                                                                            <div class="d-flex align-items-baseline ">
+                                                                                <label class="form-label"
+                                                                                    style="width: 40px"
+                                                                                    for="validationCustom01">نوم</label>
+                                                                                <input type="text" min="1"
+                                                                                    max="150"
+                                                                                    class="form-control border w-100"
+                                                                                    id="validationCustom01"
+                                                                                    placeholder="د مشتری نوم" required
+                                                                                    wire:model='customerName'>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6 col-6">
+                                                                        <div class="mb-1">
+                                                                            <div class="d-flex align-items-baseline ">
+                                                                                <label class="form-label"
+                                                                                    style="width: 40px"
+                                                                                    for="validationCustom01">مبایل</label>
+                                                                                <input type="number" min="0700000000"
+                                                                                    class="form-control border w-100"
+                                                                                    id="validationCustom01"
+                                                                                    placeholder="د مشتری مبایل شمیره"
+                                                                                    required
+                                                                                    wire:model='customerPhone'>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-2">
                                                                     <div class="col-md-3 col-sm-3 col-3">
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
@@ -148,7 +253,8 @@
                                                                                 max="150"
                                                                                 class="form-control p-1"
                                                                                 id="validationCustom01"
-                                                                                placeholder="00" required>
+                                                                                placeholder="00" required
+                                                                                wire:model='height' step="0.5">
                                                                         </div>
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
@@ -158,9 +264,10 @@
                                                                                 max="150"
                                                                                 class="form-control p-1"
                                                                                 id="validationCustom01"
-                                                                                placeholder="00" required>
+                                                                                placeholder="00" required
+                                                                                wire:model='shoulder' step="0.5">
                                                                         </div>
-                                                                       
+
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
                                                                                 style="width: 50px"
@@ -169,7 +276,8 @@
                                                                                 max="150"
                                                                                 class="form-control p-1"
                                                                                 id="validationCustom01"
-                                                                                placeholder="00" required>
+                                                                                placeholder="00" required
+                                                                                wire:model='neck' step="0.5">
                                                                         </div>
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
@@ -179,7 +287,8 @@
                                                                                 max="150"
                                                                                 class="form-control p-1"
                                                                                 id="validationCustom01"
-                                                                                placeholder="00" required>
+                                                                                placeholder="00" required
+                                                                                wire:model='side' step="0.5">
                                                                         </div>
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
@@ -189,128 +298,144 @@
                                                                                 max="150"
                                                                                 class="form-control p-1"
                                                                                 id="validationCustom01"
-                                                                                placeholder="00" required>
+                                                                                placeholder="00" required
+                                                                                wire:model='waist' step="0.5">
                                                                         </div>
-                                                                        
+
 
                                                                     </div>
-                                                                   
+
                                                                     <div class="col-md-9 col-sm-9 col-9 p-0 ">
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
                                                                                 style="width:60px"
                                                                                 for="validationCustom02">یخن</label>
                                                                             <select name=""
+                                                                                wire:model='neckStyle_id'
                                                                                 class="w-100  border border-light"
-                                                                                id="">
-                                                                                <option value="">عام</option>
-                                                                                <option value="">عام</option>
-                                                                                <option value="">عام</option>
+                                                                                id="selectNeck">
+                                                                                <option value="-1"></option>
+                                                                                @foreach ($vasketNeckStyles as $style)
+                                                                                    <option
+                                                                                        value="{{ $style->id }}">
+                                                                                        {{ $style->name }}</option>
+                                                                                @endforeach
                                                                             </select>
+                                                                            @error('neckStyle_id')
+                                                                                <span
+                                                                                    class="text-danger feedBackError">{{ $message }}</span>
+                                                                            @enderror
                                                                         </div>
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
                                                                                 style="width:60px"
                                                                                 for="validationCustom02">شانه</label>
                                                                             <select name=""
+                                                                                wire:model='shoulderStyle_id'
                                                                                 class="w-100  border border-light"
-                                                                                id="">
-                                                                                <option value="">عام</option>
-                                                                                <option value="">عام</option>
-                                                                                <option value="">عام</option>
+                                                                                id="selectShoulder">
+                                                                                <option value="-1"></option>
+                                                                                @foreach ($vasketShoulderStyles as $style)
+                                                                                    <option
+                                                                                        value="{{ $style->id }}">
+                                                                                        {{ $style->name }}</option>
+                                                                                @endforeach
                                                                             </select>
+                                                                            @error('shoulderStyle_id')
+                                                                                <span
+                                                                                    class="text-danger feedBackError">{{ $message }}</span>
+                                                                            @enderror
                                                                         </div>
                                                                         <div class="d-flex align-items-baseline ">
                                                                             <label class="form-label"
                                                                                 style="width:60px"
                                                                                 for="validationCustom02">دامن</label>
                                                                             <select name=""
+                                                                                wire:model='skirtStyle_id'
                                                                                 class="w-100  border border-light"
-                                                                                id="">
-                                                                                <option value="">عام</option>
-                                                                                <option value="">عام</option>
-                                                                                <option value="">عام</option>
+                                                                                id="selectSkirt">
+                                                                                <option value="-1"></option>
+                                                                                @foreach ($vasketSkirtStyles as $style)
+                                                                                    <option
+                                                                                        value="{{ $style->id }}">
+                                                                                        {{ $style->name }}</option>
+                                                                                @endforeach
                                                                             </select>
+                                                                            @error('skirtStyle_id')
+                                                                                <span
+                                                                                    class="text-danger feedBackError">{{ $message }}</span>
+                                                                            @enderror
                                                                         </div>
-                                                                        <textarea name="" rows="3" class="form-control w-100 rounded-0" id="" placeholder="نوټ..."></textarea>
+                                                                        <textarea name="" wire:model='description' rows="3" class="form-control w-100 rounded-0"
+                                                                            id="" placeholder="نوټ..."></textarea>
                                                                     </div>
                                                                 </div>
+                                                                <div class="row invoice-pricing pt-2"
+                                                                    style="border-top:1px solid rgb(236, 233, 233); ">
+                                                                    <div
+                                                                        class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
+                                                                        <label class="form-label" style="width: 50px"
+                                                                            for="txtQty">تعداد</label>
+                                                                        <input type="number" min="0"
+                                                                            value="0"
+                                                                            class="form-control p-1 border-0"
+                                                                            id="txtQty" placeholder="00" required
+                                                                            wire:model='qty'>
+                                                                    </div>
+                                                                    <div
+                                                                        class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
+                                                                        <label class="form-label" style="width: 50px"
+                                                                            for="txtPrice">نرخ</label>
+                                                                        <input type="number" min="0"
+                                                                            value="0"
+                                                                            class="form-control p-1 border-0"
+                                                                            id="txtPrice" placeholder="00" required
+                                                                            wire:model='price'>
+                                                                    </div>
+                                                                    <div
+                                                                        class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
+                                                                        <label class="form-label" style="width: 50px"
+                                                                            for="txtRakht">رخت</label>
+                                                                        <input type="number" min="0"
+                                                                            value="0"
+                                                                            class="form-control p-1 border-0"
+                                                                            id="txtRakht" placeholder="00"
+                                                                            wire:model='rakht'>
+                                                                    </div>
+                                                                    <div
+                                                                        class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
+                                                                        <label class="form-label" style="width: 50px"
+                                                                            for="txtTotal">جمله</label>
+                                                                        <input type="number" min="0"
+                                                                            class="form-control p-1 border-0" disabled
+                                                                            id="txtTotal" placeholder="00"
+                                                                            value="0" required
+                                                                            wire:model='total'>
+                                                                    </div>
+                                                                    <div
+                                                                        class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
+                                                                        <label class="form-label" style="width: 50px"
+                                                                            for="txtAdvance">پیشکی</label>
+                                                                        <input type="number" min="0"
+                                                                            class="form-control p-1 border-0"
+                                                                            id="txtAdvance" wire:model='paid'
+                                                                            value="0" placeholder="00">
+                                                                    </div>
+                                                                    <div
+                                                                        class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
+                                                                        <label class="form-label" style="width: 50px"
+                                                                            for="txtBalance">باقی</label>
+                                                                        <input type="number" min="0"
+                                                                            class="form-control p-1 border-0"
+                                                                            value="0" disabled id="txtBalance"
+                                                                            placeholder="00" required
+                                                                            wire:model='balance'>
+                                                                    </div>
+                                                                </div>
+
                                                             </form>
                                                         </div>
-                                                        <div class="row invoice-pricing pt-1" style="border-top:1px solid rgb(236, 233, 233); ">
-                                                            <div class="mr-1 d-flex align-items-baseline col-md-3 col-sm-3 col-3 float-right">
-                                                                <label class="form-label"
-                                                                    style="width: 50px"
-                                                                    for="validationCustom01">تعداد</label>
-                                                                <input type="number" min="1"
-                                                                    max="150"
-                                                                    class="form-control p-1 border-0"
-                                                                    id="validationCustom01"
-                                                                    placeholder="00" required>
-                                                            </div>
-                                                            <div class="mr-1 d-flex align-items-baseline col-sm-3 col-3 float-right">
-                                                                <label class="form-label"
-                                                                    style="width: 50px"
-                                                                    for="validationCustom01">نرخ</label>
-                                                                <input type="number" min="1"
-                                                                    max="150"
-                                                                    class="form-control p-1 border-0"
-                                                                    id="validationCustom01"
-                                                                    placeholder="00" required>
-                                                            </div>
-                                                            <div class="mr-1 d-flex align-items-baseline col-sm-3 col-3 float-right">
-                                                                <label class="form-label"
-                                                                    style="width: 50px"
-                                                                    for="validationCustom01">جمله</label>
-                                                                <input type="number" min="1"
-                                                                    max="150"
-                                                                    class="form-control p-1 border-0" disabled
-                                                                    id="validationCustom01"
-                                                                    placeholder="00" required>
-                                                            </div>
-                                                            <div class="mr-1 d-flex align-items-baseline col-sm-3 col-3 float-right">
-                                                                <label class="form-label"
-                                                                    style="width: 50px"
-                                                                    for="validationCustom01">رخت</label>
-                                                                <input type="number" min="1"
-                                                                    max="150"
-                                                                    class="form-control p-1 border-0"
-                                                                    id="validationCustom01"
-                                                                    placeholder="00" required>
-                                                            </div>
-                                                            <div class="mr-1 d-flex align-items-baseline col-sm-3 col-3 float-right">
-                                                                <label class="form-label"
-                                                                    style="width: 50px"
-                                                                    for="validationCustom01">پیشکی</label>
-                                                                <input type="number" min="1"
-                                                                    max="150"
-                                                                    class="form-control p-1 border-0"
-                                                                    id="validationCustom01"
-                                                                    placeholder="00" required>
-                                                            </div>
-                                                            <div class="mr-1 d-flex align-items-baseline col-sm-3 col-3 float-right">
-                                                                <label class="form-label"
-                                                                    style="width: 50px"
-                                                                    for="validationCustom01">باقی</label>
-                                                                <input type="number" min="1"
-                                                                    max="150"
-                                                                    class="form-control p-1 border-0" disabled
-                                                                    id="validationCustom01"
-                                                                    placeholder="00" required>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline col-sm-6 col-6 ">
-                                                                <label class="form-label"
-                                                                    style="width: 100px"
-                                                                    for="validationCustom02">خیاط</label>
-                                                                <select name=""
-                                                                    class="w-100 border-0 "
-                                                                    id="">
-                                                                    <option value="">عام</option>
-                                                                    <option value="">عام</option>
-                                                                    <option value="">عام</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
+
 
                                                     </div>
                                                 </div>
@@ -319,7 +444,7 @@
                                     </div>
                                     <div class="modal-footer">
 
-                                        <input type="submit" class="btn btn-primary" form="addnewbillForm"
+                                        <input type="submit" class="btn btn-primary" form="formAddVasket"
                                             value="ذخیره یی کړی" />
                                         <a href="javascript:window.print()"
                                             class="btn btn-success waves-effect waves-light me-1"><i
@@ -330,36 +455,16 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- ...... --}}
-                        <!-- add new Customer Modal example -->
-                        <div class="modal fade" id="addnewCustomer" data-bs-backdrop="static"
-                            data-bs-keyboard="false" tabindex="-1" role="dialog"
-                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">د نوی مشتری معلومات ولیکی
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-light"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Understood</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- end modal --}}
+
                         <div class="card-body " id="cutomerList">
-                            <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                <thead>
-                                    <tr>
+                            <table id="datatabl" class="table   table-striped table-hover "
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                <thead class="">
+
+                                    <tr class="text-bold">
+                                        <th>#</th>
                                         <th>نوم</th>
                                         <th>نمبر</th>
                                         <th>تاریخ</th>
@@ -368,36 +473,78 @@
                                         <th>ټول قیمت</th>
                                         <th>تحویل پیسی</th>
                                         <th>پاتی پیسی</th>
-                                        <th>قد اندازه</th>
                                         <th>اختیارونه</th>
                                     </tr>
                                 </thead>
-
-
                                 <tbody>
-
+                                    @foreach ($Vaskates as $vasket)
+                                        <tr id="vasket_{{ $vasket->id }}" wire:key='vasket_{{ $vasket->id }}'>
+                                            <td>{{ $vasket->id }}</td>
+                                            <td>{{ $vasket->customer_name }}</td>
+                                            <td>{{ $vasket->customer_number }}</td>
+                                            <td>{{ $vasket->date }}</td>
+                                            <td>{{ $vasket->price }}</td>
+                                            <td>{{ $vasket->rakht }}</td>
+                                            <td>{{ $vasket->price * $vasket->qty + $vasket->rakht }}</td>
+                                            <td>{{ $vasket->paid }}</td>
+                                            <td>{{ $vasket->price * $vasket->qty + $vasket->rakht - $vasket->paid }}
+                                            </td>
+                                            <td class="text-center">
+                                                <i class="uil-newspaper font-size-20 text-primary mx-1"
+                                                    onclick="showBill({{ $vasket->id }},'show')"
+                                                    style="cursor: pointer"></i>
+                                                <i class="uil-trash-alt font-size-20 text-danger mx-1 deleteBtn"
+                                                   wire:click='deleteVaskate({{ $vasket->id }})' wire:confirm='ایا غواړی چی دا فرمایش پاک کړی؟' style="cursor: pointer"></i>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+                            <div class="">
+                                {{ $Vaskates->links() }}
+                            </div>
                         </div>
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
-
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-</div>
-@section('customJS')
-    <!-- Required datatable js -->
-    <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }} "></script>
-    <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Responsive examples -->
-    <script src=" {{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }} "></script>
-    <script src=" {{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }} "></script>
+    <div class="" wire:ignore>
+        @section('customJS')
+            <script>
+                $(document).ready(function() {
 
-    <!-- Datatable init js -->
-    <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
-    <!-- parsleyjs -->
-    <script src=" {{ asset('assets/libs/parsleyjs/parsley.min.js') }} "></script>
-    <script src=" {{ asset('assets/js/pages/form-validation.init.js') }} "></script>
-@endsection
+                    $("#txtQty , #txtPrice , #txtRakht , #txtAdvance").keyup(function(e) {
+                        var textQTY = $("#txtQty").val();
+                        var textPrice = $("#txtPrice").val();
+                        var textRakht = $("#txtRakht").val();
+                        var textAdvance = $("#txtAdvance").val();
+                        var total = (parseInt(textQTY) * parseInt(textPrice)) + parseInt(textRakht);
+                        var balance = parseInt(total) - parseInt(textAdvance);
+                        $("#txtTotal").val(total);
+                        $("#txtBalance").val(balance);
+                    });
+                    $("#selectStaff , #selectNeck , #selectShoulder , #selectSkirt").change(function(e) {
+                        e.preventDefault();
+                        $(".feedBackError").hide();
+                    });
+
+
+                });
+            </script>
+            <script>
+                $(document).ready(function() {
+                    window.addEventListener("newVasketeAdded", event => {
+                        $('#formAddVasket')[0].reset();
+                        $("#addnewBill").modal("hide");
+                    })
+                });
+            </script>
+            <!-- parsleyjs -->
+            <script src=" {{ asset('assets/libs/parsleyjs/parsley.min.js') }} "></script>
+            <script src=" {{ asset('assets/js/pages/form-validation.init.js') }} "></script>
+            <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }} "></script>
+        @endsection
+    </div>
+</div>

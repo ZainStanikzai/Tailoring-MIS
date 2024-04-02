@@ -36,10 +36,12 @@ class StaffModel extends Component
         try {
            $newStaff = ModelsStaff::create(['name' => $this->name, 'phone' => $this->phone, 'salary' => 0]);
             session()->flash('success', 'نوی کارکوونکی سیستم ته اضافه شو.');
+            $this->modelClass = "";
+            $this->modelStyle = "";
+            $this->reset();
         } catch (Exception $ex) {
             session()->flash('error', $ex);
         }
-        // $this->reset();
         $this->dispatch('staffCreated', id:$newStaff->id,name:$newStaff->name,phone:$newStaff->phone,created_at:$newStaff->created_at);
     }
     

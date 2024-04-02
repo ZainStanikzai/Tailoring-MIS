@@ -29,6 +29,11 @@ class DatabaseSeeder extends Seeder
             'sidbarSize'=>'small',
             'sidebarColor' => 'light',
         ]);
+        \App\Models\Staff::create([
+            'name' => 'stanikzai',
+            'phone'=>'0765957291',
+            'salary' => 0,
+        ]);
         
         
     }

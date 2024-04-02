@@ -10,6 +10,9 @@ class Neck extends Model
 
     protected $table = "neck";
 
+    protected function NeckStyleContainer(){
+        return $this->hasMany(NeckStyleContainer::class);
+    }
     protected $fillable = ['name','clothing_type'];
     use HasFactory;
 }

@@ -122,6 +122,7 @@
                                                          style="cursor: pointer" data-id="'+event.detail.id+'"\
                                                          data-bs-toggle="modal" data-bs-target="#staffPayModal"></i>');
                  $("#staffPayModal").modal('hide');
+                 $(".modal-backdrop").hide();
              })
          });
      </script>

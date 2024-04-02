@@ -2,12 +2,169 @@
 
 namespace App\Livewire;
 
+use App\Models\Customer;
 use Livewire\Component;
+use App\Models\Neck;
+use App\Models\NeckStyleContainer;
+use App\Models\shoulder;
+use App\Models\ShoulderStyleContainer;
+use App\Models\Skirt;
+use App\Models\SkirtStyleContainer;
+use App\Models\Staff;
+use Illuminate\Support\Facades\DB;
+use App\Models\Vaskates;
+use Exception;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
+use Livewire\WithPagination;
 
 class VaskatBill extends Component
 {
+
+    use WithPagination;
+
+   
+
+   
+
+
+    public $vasketNeckStyles;
+    public $vasketShoulderStyles;
+    public $vasketSkirtStyles;
+    public $staffs;
+    public $vasketLastID;
+    public $vasketStyles;  
+
+    public $customerName;
+    public $customerPhone;
+    #[Validate('required',message:"خیاط انتخاب کری.")]
+    public $staff_id;
+    public $sewDate;
+    public $height;
+    public $shoulder;
+    public $side;
+    public $waist;
+    public $neck;
+    public $price = 0;
+    public $rakht = 0;
+    public $qty = 0;
+    public $paid = 0;
+    public $total = 0;
+    public $balance = 0;
+    public $description;
+    #[Validate('required',message:"ستایل انتخاب کری.")]
+    public $neckStyle_id;
+    #[Validate('required',message:"ستایل انتخاب کری.")]
+    public $shoulderStyle_id;
+    #[Validate('required',message:"ستایل انتخاب کری.")]
+    public $skirtStyle_id;
+
+    public $modelClass;
+    public $modelStyle;
+
+    public function initData(){
+        $this->vasketNeckStyles = Neck::where("clothing_type","vasket")->latest()->get();
+        $this->vasketShoulderStyles = shoulder::where("clothing_type","vasket")->latest()->get();
+        $this->vasketSkirtStyles = Skirt::where("clothing_type","vasket")->latest()->get();
+        $this->staffs = Staff::latest()->get();
+        $this->vasketLastID = Vaskates::all()->last();
+        if($this->vasketLastID != []){
+            $this->vasketLastID = Vaskates::all()->last()["id"];
+
+            $this->vasketLastID += 1; 
+        }else{
+            $this->vasketLastID = 1;    
+        }
+    }
+    public $query;
+    public function search($term){
+        $this->query = $term;
+        $this->resetPage();
+    }
+    public function creatVasket(){
+
+        $this->modelClass = "show";
+        $this->modelStyle = "display: block;";
+        $this->validate();
+        try {
+            DB::beginTransaction();
+            $newCustomer = Customer::create(['name'=>$this->customerName, 'numbers'=>$this->customerPhone]);
+            $newVasket = Vaskates::create([
+                "customer_id"=>$newCustomer->id,
+                "customer_name" =>$this->customerName,
+                "customer_number" =>$this->customerPhone,
+                "staff_id"=>$this->staff_id,
+                "height" =>$this->height,
+                "shoulder"=>$this->shoulder,
+                "side" =>$this->side,
+                "waist"=>$this->waist,
+                "neck" =>$this->neck,
+                "price"=>$this->price,
+                "rakht"=>$this->rakht,
+                "qty" => $this->qty,
+                "paid" =>$this->paid,
+                "sewDate"=>$this->sewDate,
+                "status"=>"new",
+                "sewStatus"=>"0",
+                "description" =>$this->description
+            
+            ]);
+            $createCurrentNeckVasketStyles = NeckStyleContainer::create(['clothing_id'=>$newVasket->id,'neck_id'=>$this->neckStyle_id]); 
+            $createCurrentShoulderVasketStyles = ShoulderStyleContainer::create(["clothing_id"=>$newVasket->id, "shoulder_id"=>$this->shoulderStyle_id]);
+            $createCurrentSkirtVasketStyles = SkirtStyleContainer::create(["clothing_id"=>$newVasket->id,"skirt_id"=> $this->skirtStyle_id]);
+            session()->flash("success","new clothe addedd");
+            $this->dispatch("newVasketeAdded");
+
+            
+            DB::commit();
+            $this->vasketNeckStyles = Neck::where("clothing_type","vasket")->latest()->get();
+            $this->vasketShoulderStyles = shoulder::where("clothing_type","vasket")->latest()->get();
+            $this->vasketSkirtStyles = Skirt::where("clothing_type","vasket")->latest()->get();
+            $this->staffs = Staff::latest()->get();
+            $this->vasketLastID = Vaskates::all()->last()["id"];
+
+            $this->vasketLastID += 1; 
+            $this->resetPage();
+            $this->modelClass = "";
+            $this->modelStyle = "";
+            
+            
+        } catch (Exception $ex) {
+            DB::rollback();
+            dd($ex);
+            session()->flash("error",$ex);
+        }
+    }
+
+    public function deleteVaskate(Vaskates $vaskateID){
+        try{
+            $vaskateID->ShoulderContainer[0]->delete();
+            $vaskateID->NeckContainer[0]->delete();
+            $vaskateID->SkirtContainer[0]->delete();
+            $vaskateID->Customer->delete();
+            $vaskateID->delete();
+            $this->resetPage();
+        }catch(Exception $ex){
+            session()->flash("error",$ex);
+        }
+        
+    }
+
+     
+
+
+    #[On("refreshPage")]
+    public function refreshPage(){
+        $this->resetPage();
+    }
+    public function mount(){
+        $this->initData();
+        // $this->Vaskates::where("customer_name","like","%$this->query%")->latest();
+    }
     public function render()
     {
-        return view('livewire.vaskat-bill');
+        return view('livewire.vaskat-bill',[
+            'Vaskates'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->latest()->paginate(10)
+        ]);
     }
 }
