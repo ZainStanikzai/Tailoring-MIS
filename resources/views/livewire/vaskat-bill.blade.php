@@ -79,30 +79,26 @@
                                         <div class="d-flex align-items-baseline justify-content-center mx-2 p-0 m-0">نقد:{{$totalCash}}</div> 
                                         <div class="d-flex align-items-baseline justify-content-center mx-2 p-0 m-0">ټولی+پیسی:{{$totalBalance+$totalCash}}</div> 
                                         <div class="d-flex align-items-baseline justify-content-center mx-2 p-0 m-0">ټول+فرمایشونه:{{$totalRecord}}</div>
-                                        {{-- <i class="uil-cloud-database-tree font-size-24  px-2"></i> --}}
                                     </div>
-                                    <div class="filter" wire:ignore>
-                                        <div class="dropdown open">
-                                            <i
-                                                class="uil-filter btn m-0 p-0 font-size-24  px-2 dropdown-toggle"
-                                                type="button"
-                                                id="triggerId"
-                                                data-bs-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                            >
-                                        </i>
-                                            <div class="dropdown-menu" aria-labelledby="triggerId">
-                                                    <button  wire:click='showFilter("all")' class="dropdown-item ">ټول</button>
-                                                    <button wire:click='showFilter("Qarze")' class="dropdown-item ">قرضداران</button>
-                                            </div>
-                                        </div>
+                                    <div class="btn-group">
+                                        <button  wire:click='showFilter("all")' class="d-flex align-items-center btn btn-info btn-sm {{$filter=="all"?"active":""}}  " {{$filter=="all"?"disabled":""}}  ><span wire:loading class="spinner spinner-border spinner-border-sm font-size-10 "></span>ټول</button>
+                                        <button  wire:click='showFilter("Qarze")' class="d-flex align-items-center btn btn-info btn-sm {{$filter=="Qarze"?"active":""}}" {{$filter=="Qarze"?"disabled":""}}><span wire:loading  class="spinner spinner-border spinner-border-sm font-size-10 "></span>قرضداران</button>
                                     </div>
-                                    <i class="p-0 m-0 btn">
-                                        <i class="uil-search font-size-24  px-2 "></i>
-                                    </i>
+                                   
+                                    {{-- <div class="d-flex align-items-baseline "> --}}
+                                           
+                                       
+                                            {{-- <input  {{$filter=="all"?"checked":""}} type="radio" wire:click='showFilter("all")' name="filter" class="form-check-input mx-1" id="filterAll">
+                                            <label for="filterAll">ټول</label>
+                                       
+                                       
+                                            <input {{$filter=="Qarze"?"checked":""}} type="radio" wire:click='showFilter("Qarze")'  name="filter" class="form-check-input mx-1" id="filterQarze">
+                                            <label for="filterQarze">قرضداران</label> --}}
+                                        
+                                        {{-- <i class="uil-filter font-size-20"></i> --}}
+                                    {{-- </div> --}}
                                     <input dir="ltr" wire:keyup.prevent='search($event.target.value)'
-                                        type="text" placeholder="...و پلټی" name="" class="form-control"
+                                        type="text" placeholder="...و پلټی" name="" class="form-control ms-2"
                                         id="">
                                 </div>
                                 
