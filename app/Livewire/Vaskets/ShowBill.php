@@ -134,20 +134,20 @@ class ShowBill extends Component
         $vasket->balance = (($this->price * $this->qty)+$this->rakht)-$this->paid;
         $vasket->description = $this->description;
         if($this->neckStyle_id != null){
-            $vasket->NeckContainer[0]->neck_id = $this->neckStyle_id;
+            $vasket->NeckContainer->where("clothing_type","vasket")->first()->neck_id = $this->neckStyle_id;
         }
         if($this->shoulderStyle_id != null){
-            $vasket->ShoulderContainer[0]->shoulder_id = $this->shoulderStyle_id;
+            $vasket->ShoulderContainer->where("clothing_type","vasket")->first()->shoulder_id = $this->shoulderStyle_id;
         }
         if($this->skirtStyle_id != null){
-            $vasket->SkirtContainer[0]->skirt_id = $this->skirtStyle_id;
+            $vasket->SkirtContainer->where("clothing_type","vasket")->first()->skirt_id = $this->skirtStyle_id;
         }
-        $vasket->NeckContainer[0]->Save();
-        $vasket->ShoulderContainer[0]->save();
-        $vasket->SkirtContainer[0]->save();
+        $vasket->NeckContainer->first()->Save();
+        $vasket->ShoulderContainer->first()->save();
+        $vasket->SkirtContainer->first()->save();
         $vasket->Customer->save();
         $vasket->save();
-        $this->dispatch("refreshPage");
+        $this->dispatch("refreshPageVasket");
         session()->flash("success","ok updated");
     }
     public function render()

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('clothing_id');
             $table->unsignedBigInteger('skirt_id');
+            $table->string('clothing_type');
+
            
             $table->timestamps();
         });

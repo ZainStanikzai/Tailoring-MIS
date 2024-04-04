@@ -119,21 +119,15 @@ class VaskatBill extends Component
                 "description" =>$this->description
             
             ]);
-            $createCurrentNeckVasketStyles = NeckStyleContainer::create(['clothing_id'=>$newVasket->id,'neck_id'=>$this->neckStyle_id]); 
-            $createCurrentShoulderVasketStyles = ShoulderStyleContainer::create(["clothing_id"=>$newVasket->id, "shoulder_id"=>$this->shoulderStyle_id]);
-            $createCurrentSkirtVasketStyles = SkirtStyleContainer::create(["clothing_id"=>$newVasket->id,"skirt_id"=> $this->skirtStyle_id]);
+            $createCurrentNeckVasketStyles = NeckStyleContainer::create(['clothing_id'=>$newVasket->id,'neck_id'=>$this->neckStyle_id,'clothing_type'=>"vasket"]); 
+            $createCurrentShoulderVasketStyles = ShoulderStyleContainer::create(["clothing_id"=>$newVasket->id, "shoulder_id"=>$this->shoulderStyle_id,'clothing_type'=>"vasket"]);
+            $createCurrentSkirtVasketStyles = SkirtStyleContainer::create(["clothing_id"=>$newVasket->id,"skirt_id"=> $this->skirtStyle_id,'clothing_type'=>"vasket"]);
             session()->flash("success","new clothe addedd");
             $this->dispatch("newVasketeAdded");
 
             
             DB::commit();
-            $this->vasketNeckStyles = Neck::where("clothing_type","vasket")->latest()->get();
-            $this->vasketShoulderStyles = shoulder::where("clothing_type","vasket")->latest()->get();
-            $this->vasketSkirtStyles = Skirt::where("clothing_type","vasket")->latest()->get();
-            $this->staffs = Staff::latest()->get();
-            $this->vasketLastID = Vaskates::all()->last()["id"];
-
-            $this->vasketLastID += 1; 
+            $this->initData();
             $this->resetPage();
             $this->modelClass = "";
             $this->modelStyle = "";
@@ -141,16 +135,15 @@ class VaskatBill extends Component
             
         } catch (Exception $ex) {
             DB::rollback();
-            dd($ex);
             session()->flash("error",$ex);
         }
     }
 
-    public function deleteVaskate(Vaskates $vaskateID){
+    public function delete(Vaskates $vaskateID){
         try{
-            $vaskateID->ShoulderContainer[0]->delete();
-            $vaskateID->NeckContainer[0]->delete();
-            $vaskateID->SkirtContainer[0]->delete();
+            $vaskateID->NeckContainer->where("clothing_type","vasket")->first()->delete();
+            $vaskateID->NeckContainer->where("clothing_type","vasket")->first()->delete();
+            $vaskateID->SkirtContainer->where("clothing_type","vasket")->first()->delete();
             $vaskateID->Customer->delete();
             $vaskateID->delete();
             $this->resetPage();
@@ -163,13 +156,12 @@ class VaskatBill extends Component
      
 
 
-    #[On("refreshPage")]
+    #[On("refreshPageVasket")]
     public function refreshPage(){
         $this->resetPage();
     }
     public function mount(){
         $this->initData();
-        // $this->Vaskates::where("customer_name","like","%$this->query%")->latest();
     }
     public function render()
     {

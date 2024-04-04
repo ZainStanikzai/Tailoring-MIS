@@ -15,7 +15,10 @@ class SkirtStyleContainer extends Model
     protected function Vasket(){
         return $this->belongsTo(Vaskates::class, "clothing_id");
     }
+    protected function Cloth(){
+        return $this->belongsTo(Cloth::class, "clothing_id");
+    }
 
-    protected $fillable = ["clothing_id","skirt_id"];
+    protected $fillable = ["clothing_id","skirt_id","clothing_type"];
     use HasFactory;
 }

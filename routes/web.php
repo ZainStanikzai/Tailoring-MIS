@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Cloth;
 use App\Models\Customer;
 use App\Models\Neck;
 use App\Models\NeckStyleContainer;
@@ -43,11 +44,10 @@ Route::get('/login', App\Livewire\Login::class)->name('login')->middleware('gues
 
 
 Route::get("/test" , function(){
-    $v  = Vaskates::find(2);
-
-
-    $v->Customer->name = "qasaab";
-        return $v->Customer;
+    $v  = Cloth::find(6);
+   
+   
+    return $v->SleeveStyleContainer->where("clothing_type","cloth")->first()->sleeve_id;
     
     
  

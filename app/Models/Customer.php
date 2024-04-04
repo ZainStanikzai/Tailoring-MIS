@@ -11,7 +11,10 @@ class Customer extends Model
     protected $fillable = ['name','numbers',];
 
     protected function Vaskate(){
-        return $this->hasMany(Vaskates::class);
+        return $this->hasMany(Vaskates::class,"customer_id");
+    }
+    protected function Cloth(){
+        return $this->hasMany(Cloth::class,'customer_id');
     }
     use HasFactory;
 }

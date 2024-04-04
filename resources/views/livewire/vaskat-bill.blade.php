@@ -1,6 +1,4 @@
 @section('customStyle')
-    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }} " rel="stylesheet" type="text/css" />
-
     <script>
     var showVaketInfoID,modelStatus;
         function showBill(id,state) {
@@ -85,18 +83,7 @@
                                         <button  wire:click='showFilter("Qarze")' class="d-flex align-items-center btn btn-info btn-sm {{$filter=="Qarze"?"active":""}}" {{$filter=="Qarze"?"disabled":""}}><span wire:loading  class="spinner spinner-border spinner-border-sm font-size-10 "></span>قرضداران</button>
                                     </div>
                                    
-                                    {{-- <div class="d-flex align-items-baseline "> --}}
-                                           
-                                       
-                                            {{-- <input  {{$filter=="all"?"checked":""}} type="radio" wire:click='showFilter("all")' name="filter" class="form-check-input mx-1" id="filterAll">
-                                            <label for="filterAll">ټول</label>
-                                       
-                                       
-                                            <input {{$filter=="Qarze"?"checked":""}} type="radio" wire:click='showFilter("Qarze")'  name="filter" class="form-check-input mx-1" id="filterQarze">
-                                            <label for="filterQarze">قرضداران</label> --}}
-                                        
-                                        {{-- <i class="uil-filter font-size-20"></i> --}}
-                                    {{-- </div> --}}
+                                    
                                     <input dir="ltr" wire:keyup.prevent='search($event.target.value)'
                                         type="text" placeholder="...و پلټی" name="" class="form-control ms-2"
                                         id="">
@@ -121,6 +108,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close">
                                         </button>
+                                        
                                     </div>
                                     <div class="modal-body">
                                         <div class="row m-0 p-0" id="invoiceModal">
@@ -128,6 +116,8 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <div class="invoice-title">
+                                                            <div class="position-absolute" style="left: 10px;top:0">Bill :{{$vasketLastID}}</div>
+
                                                             <div style="left: 10px;top:0"
                                                                 class="mt-4 position-absolute  d-flex align-items-baseline justify-content-end">
                                                                 <h5 class="font-size-16 mb-1">رسید تاریخ </h5>
@@ -509,10 +499,6 @@
                     })
                 });
             </script>
-            <!-- parsleyjs -->
-            <script src=" {{ asset('assets/libs/parsleyjs/parsley.min.js') }} "></script>
-            <script src=" {{ asset('assets/js/pages/form-validation.init.js') }} "></script>
-            <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }} "></script>
         @endsection
     </div>
 </div>
