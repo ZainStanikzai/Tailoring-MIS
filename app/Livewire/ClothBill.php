@@ -189,6 +189,7 @@ class ClothBill extends Component
             SleeveStyleContainer::create(["clothing_id"=>$newRecord->id, "sleeve_id"=>$this->shoulderStyle_id,'clothing_type'=>"cloth"]);
             session()->flash("success","new clothe addedd");
             $this->dispatch("newRecordCreated");
+            $this->reset();
             $this->initData();
             $this->resetPage();
             $this->modelClass = "";

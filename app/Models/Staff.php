@@ -15,6 +15,9 @@ class Staff extends Model
     protected function Vasket(){
         return $this->hasMany(Vaskates::class, "staff_id");
     }
+    protected function Coat(){
+        return $this->hasMany(Coat::class,'customer_id');
+    }
     protected $fillable = [
         'name',
         'phone',

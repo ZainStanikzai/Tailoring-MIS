@@ -15,23 +15,27 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('staff_id');
-            $table->smallInteger('height');
-            $table->smallInteger('shoulder');
-            $table->smallInteger('sleeve');
-            $table->smallInteger('waist');
-            $table->smallInteger('sourin');
-            $table->smallInteger('crossBig');
-            $table->smallInteger('cross');
-            $table->unsignedBigInteger('neckSubStyle');
-            $table->unsignedBigInteger('backStyle');
+            $table->string('customer_name');
+            $table->string('customer_number');
+            $table->float('height');
+            $table->float('shoulder');
+            $table->float('sleeve');
+            $table->float('side');
+            $table->float('waist');
+            $table->float('sourin');
+            $table->float('crossBig');
+            $table->float('cross');
+            $table->unsignedBigInteger('neckSubStyle_id');
+            $table->unsignedBigInteger('backStyle_id');
             $table->integer('price');
             $table->smallInteger('qty');
             $table->integer('paid');
+            $table->integer('rakht');
             $table->integer('balance')->default(0);
-
             $table->string('status');
             $table->string('sewStatus');
-            $table->string('description');
+            $table->date('sewDate');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

@@ -127,6 +127,7 @@ class VaskatBill extends Component
 
             
             DB::commit();
+            $this->reset();
             $this->initData();
             $this->resetPage();
             $this->modelClass = "";

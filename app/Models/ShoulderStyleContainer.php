@@ -19,6 +19,9 @@ class ShoulderStyleContainer extends Model
     protected function Cloth(){
         return $this->belongsTo(Cloth::class, "clothing_id");
     }
+    protected function Coat(){
+        return $this->belongsTo(Cloth::class, "clothing_id");
+    }
     protected $fillable = ["clothing_id","shoulder_id","clothing_type"];
     use HasFactory;
 }

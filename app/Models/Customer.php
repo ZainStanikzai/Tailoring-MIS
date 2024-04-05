@@ -16,5 +16,8 @@ class Customer extends Model
     protected function Cloth(){
         return $this->hasMany(Cloth::class,'customer_id');
     }
+    protected function Coat(){
+        return $this->hasMany(Coat::class,'customer_id');
+    }
     use HasFactory;
 }

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('staff_id');
-            $table->smallInteger('height');
-            $table->smallInteger('waist');
-            $table->smallInteger('leg');
-            $table->smallInteger('sourin');
+            $table->float('height');
+            $table->float('waist');
+            $table->float('leg');
+            $table->float('sourin');
             $table->integer('price');
             $table->smallInteger('qty');
             $table->integer('paid');

@@ -633,6 +633,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="">
+                            {{ $Cloths->links() }}
+                        </div>
                     </div>
                 </div>
             </div> <!-- end col -->
