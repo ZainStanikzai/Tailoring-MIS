@@ -2,12 +2,11 @@
 
 namespace App\Livewire;
 
-use App\Models\Cloth;
 use App\Models\Customer;
 use Livewire\Component;
 use App\Models\Neck;
 use App\Models\NeckStyleContainer;
-use App\Models\Panth;
+use Livewire\Attributes\Url;
 use App\Models\shoulder;
 use App\Models\ShoulderStyleContainer;
 use App\Models\Skirt;
@@ -17,14 +16,10 @@ use App\Models\SleeveStyleContainer;
 use App\Models\Staff;
 use App\Models\Strip;
 use App\Models\StripStyleContainer;
-use App\Models\style_buttonStyle;
-use App\Models\style_frontpocketStyle;
-use App\Models\style_salayeeStyle;
-use App\Models\style_sidepocketStyle;
-use App\Models\style_sleeveMouthStyle;
+
 use App\Models\Tshirt;
 use Illuminate\Support\Facades\DB;
-use App\Models\Vaskates;
+
 use Exception;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -168,7 +163,7 @@ class TshirtBill extends Component
         }
         
     }
-
+    #[Url(as: 'q')]
     public $query;
     public function search($term){
         $this->query = $term;

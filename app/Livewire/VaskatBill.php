@@ -16,6 +16,7 @@ use App\Models\Vaskates;
 use Exception;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 
 class VaskatBill extends Component
@@ -76,6 +77,7 @@ class VaskatBill extends Component
             $this->vasketLastID = 1;    
         }
     }
+    #[Url(as: 'q')]
     public $query;
     public function search($term){
         $this->query = $term;

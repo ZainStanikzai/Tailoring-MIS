@@ -20,6 +20,7 @@ use Exception;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\WithPagination;
+use Livewire\Attributes\Url;
 class CoatBill extends Component
 {
     use WithPagination;
@@ -167,6 +168,7 @@ class CoatBill extends Component
         }
         
     }
+    #[Url(as: 'q')]
     public $query;
     public function search($term){
         $this->query = $term;
