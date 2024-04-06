@@ -149,7 +149,7 @@ class ShowBill extends Component
             $object->paid = $this->paid;
             $object->balance = (($this->price * $this->qty)+$this->rakht)-$this->paid;
             $object->status ="new";
-            $object->sewStatus ="0";
+
             $object->description =$this->description;
     
             $object->StripStyleContainer->where("clothing_type","tshirt")->first()->strip_id = $this->stripStyle_id;
