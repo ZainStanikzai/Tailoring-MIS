@@ -83,11 +83,11 @@
                                 <div class="btn-group">
                                     <button wire:click='showFilter("all")'
                                         class="d-flex align-items-center btn btn-info btn-sm {{ $filter == 'all' ? 'active' : '' }}  "
-                                        {{ $filter == 'all' ? 'disabled' : '' }}><span wire:loading
+                                        {{ $filter == 'all' ? 'disabled' : '' }}><span wire:loading wire:target='showFilter("all")'
                                             class="spinner spinner-border spinner-border-sm font-size-10 "></span>ټول</button>
                                     <button wire:click='showFilter("Qarze")'
                                         class="d-flex align-items-center btn btn-info btn-sm {{ $filter == 'Qarze' ? 'active' : '' }}"
-                                        {{ $filter == 'Qarze' ? 'disabled' : '' }}><span wire:loading
+                                        {{ $filter == 'Qarze' ? 'disabled' : '' }}><span wire:loading wire:target='showFilter("Qarze")'
                                             class="spinner spinner-border spinner-border-sm font-size-10 "></span>قرضداران</button>
                                 </div>
 

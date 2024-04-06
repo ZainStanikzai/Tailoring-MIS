@@ -23,7 +23,7 @@ class Index extends Component
         $this->Jan  +=  DB::select("SELECT sum((panths.price*panths.qty)+panths.rakht) as total FROM panths where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 1;")[0]->total;
         $this->Jan  +=  DB::select("SELECT sum((tshirts.price*tshirts.qty)+tshirts.rakht) as total FROM tshirts where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 1;")[0]->total;
         if ($this->Jan == null) {
-            $this->Jan = '';
+            $this->Jan = 0;
         }
 
         $this->Feb  +=  DB::select("SELECT sum((Cloths.price*cloths.qty)+cloths.rakht) as total FROM cloths where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 2;")[0]->total;
@@ -104,7 +104,7 @@ class Index extends Component
         $this->Oct  +=  DB::select("SELECT sum((panths.price*panths.qty)+panths.rakht) as total FROM panths where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 10;")[0]->total;
         $this->Oct  +=  DB::select("SELECT sum((tshirts.price*tshirts.qty)+tshirts.rakht) as total FROM tshirts where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 10;")[0]->total;
         if ($this->Oct == null) {
-            $this->Oct = '';
+            $this->Oct = 0;
         }
 
         $this->Nov  +=  DB::select("SELECT sum((Cloths.price*cloths.qty)+cloths.rakht) as total FROM cloths where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 11;")[0]->total;
@@ -113,7 +113,7 @@ class Index extends Component
         $this->Nov  +=  DB::select("SELECT sum((panths.price*panths.qty)+panths.rakht) as total FROM panths where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 11;")[0]->total;
         $this->Nov  +=  DB::select("SELECT sum((tshirts.price*tshirts.qty)+tshirts.rakht) as total FROM tshirts where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 11;")[0]->total;
         if ($this->Nov == null) {
-            $this->Nov = '';
+            $this->Nov = 0;
         }
 
         $this->Dec  +=  DB::select("SELECT sum((Cloths.price*cloths.qty)+cloths.rakht) as total FROM cloths where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 12;")[0]->total;
@@ -122,7 +122,7 @@ class Index extends Component
         $this->Dec  +=  DB::select("SELECT sum((panths.price*panths.qty)+panths.rakht) as total FROM panths where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 12;")[0]->total;
         $this->Dec  +=  DB::select("SELECT sum((tshirts.price*tshirts.qty)+tshirts.rakht) as total FROM tshirts where YEAR(created_at) = YEAR(CURRENT_TIMESTAMP()) and Month(created_at) = 12;")[0]->total;
         if ($this->Dec == null) {
-            $this->Dec = '';
+            $this->Dec =0;
         }
     }
     public $activePanel = "cloth";
