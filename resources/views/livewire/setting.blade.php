@@ -30,10 +30,9 @@
                                 <div class="clearfix"></div>
                                 <div>
                                     <label for="setting_image">
-                                        <img src=" {{ asset('assets/images/users/avatar-4.jpg') }} " alt=""
+                                        <img src=" {{ asset('assets/images/logo-sm.png') }} " alt=""
                                             class="avatar-lg rounded-circle img-thumbnail">
                                     </label>
-                                    <input type="file" id="setting_image" class="hidden">
                                 </div>
                             </div>
 
