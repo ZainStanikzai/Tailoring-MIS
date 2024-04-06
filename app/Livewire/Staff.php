@@ -7,17 +7,16 @@ use Exception;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Attributes\On;
-
 class Staff extends Component
 {
-    public $Staffs;
-   public function mount(){
-        $this->Staffs =  ModelsStaff::latest()->get();
-    } 
+  
     
     
     public function render()
     {
-        return view('livewire.staff');
+        return view('livewire.staff',[
+            'Staffs' => ModelsStaff::latest()->get(),
+            ''
+        ]);
     }
 }

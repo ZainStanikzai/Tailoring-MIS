@@ -54,9 +54,9 @@
                                         <th>نمبر</th>
                                         <th>د کار نیټه</th>
                                         <th>تعداد د جوړو</th>
-                                        {{-- <th>ټول قیمت</th> --}}
+                                     
                                         <th>اخستل سوی پیسی</th>
-                                        {{-- <th>پاتی پیسی</th> --}}
+                                      
                                         <th>اختیارونه</th>
                                     </tr>
                                 </thead>
@@ -69,7 +69,14 @@
                                             <td class="staff-phone-id-{{ $Staff->id }}">{{ $Staff->phone }}</td>
                                             <td>{{ $Staff->created_at }}</td>
                                             <td>
-                                                0
+                                                <?php
+                                                $cloths  = \App\Models\Cloth::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
+                                                $vaskets  = \App\Models\Vaskates::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
+                                                $coats  = \App\Models\Coat::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
+                                                $panths  = \App\Models\Panth::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
+                                                $tshirts  = \App\Models\Tshirt::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
+                                                echo  $cloths + $vaskets +  $coats +  $panths + $tshirts;
+                                                ?>
                                             </td>
                                             <td
                                                 class="staffPayTablePayItem staffPayTablePayItem-id-{{ $Staff->id }}">

@@ -26,9 +26,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', App\Livewire\Index::class)->name('home');
     Route::get('/cloths', App\Livewire\ClothBill::class)->name('bill.cloths');
+    Route::get('/cloths/{cnum}', App\Livewire\ClothBill::class)->name('bill.cloths.withCustomerNumber');
     Route::get('/vaskate', App\Livewire\VaskatBill::class)->name('bill.vaskate');
     Route::get('/coat', App\Livewire\CoatBill::class)->name('bill.coat');
     Route::get('/panth', App\Livewire\PanthBill::class)->name('bill.panth');
+    Route::get('/panth/{term}', App\Livewire\PanthBill::class)->name('bill.panth.withCustomerNumber');
     Route::get('/tshirt', App\Livewire\TshirtBill::class)->name('bill.tshirt');
     Route::get('/customers', App\Livewire\Customer::class)->name('page.customer');
     Route::get('/staff', App\Livewire\Staff::class)->name('page.staff');
