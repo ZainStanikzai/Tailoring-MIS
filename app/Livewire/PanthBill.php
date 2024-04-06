@@ -11,6 +11,7 @@ use App\Models\Panth;
 use App\Models\Staff;
 
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Url;
 
 use Exception;
 use Livewire\Attributes\On;
@@ -116,7 +117,10 @@ class PanthBill extends Component
         }
         
     }
+    
+    #[Url(as: 'q')]
     public $query;
+    
     public function search($term){
         $this->query = $term;
         $this->resetPage();

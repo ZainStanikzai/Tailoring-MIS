@@ -17,8 +17,8 @@ class StaffShowAllCloth extends Component
     public function mount($id){
         $this->ActiveStaff = Staff::findOrFail($id);
     }
-    public function showClothInfo($path){
-       return redirect("/$path/07890");
+    public function showClothInfo($path,$number){
+       return $this->redirect("/$path?q=$number", navigate:true);
     }
    
     public function completed($id , $object){ 

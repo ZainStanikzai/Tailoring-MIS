@@ -86,7 +86,7 @@
                                                     data-bs-toggle="modal" data-bs-target="#staffPayModal"></i>
                                             </td>
                                             <td class="d-flex align-items-center justify-content-center">
-                                                <a href="{{ route('staff.details', ['id' => $Staff->id]) }}"
+                                                <a href="{{ route('staff.details', ['id' => $Staff->id]) }}" wire:navigate.hover
                                                     class="uil uil-clipboard-notes font-size-20 mx-1 text-primary "
                                                     style="cursor: pointer"></a>
                                                 <i class="uil uil-edit font-size-20 mx-1 text-primary staffEdit staffEdit-id-{{ $Staff->id }}"

@@ -81,7 +81,7 @@
                                                 <tr>
                                                     <td>{{$item->id}}</td>
                                                     <td>{{$item->customer_name}}</td>
-                                                    <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("cloths")'> {{$item->customer_number}}</td>
+                                                    <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("cloths","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
                                                     <td>{{$item->sewDate}}</td>
                                                     <td>
                                                         <button  wire:click='completed({{ $item->id }},"cloth")'
@@ -115,7 +115,7 @@
                                             <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("vaskate")'> {{$item->customer_number}}</td>
+                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("vaskate","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
                                                 <td>{{$item->sewDate}}</td>
                                                 <td>
                                                     <button  wire:click='completed({{ $item->id }},"vasket")'
@@ -148,7 +148,7 @@
                                             <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("coat")'> {{$item->customer_number}}</td>
+                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("coat","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
                                                 <td>{{$item->sewDate}}</td>
                                                 <td>
                                                     <button  wire:click='completed({{ $item->id }},"coat")'
@@ -181,7 +181,7 @@
                                             <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("panth")'> {{$item->customer_number}}</td>
+                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("panth","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
                                                 <td>{{$item->sewDate}}</td>
                                                 <td>
                                                     <button  wire:click='completed({{ $item->id }},"panth")'
@@ -214,7 +214,7 @@
                                             <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("tshirt")'> {{$item->customer_number}}</td>
+                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("tshirt","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
                                                 <td>{{$item->sewDate}}</td>
                                                 <td>
                                                     <button  wire:click='completed({{ $item->id }},"tshirt")'
