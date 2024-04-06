@@ -391,7 +391,7 @@
                                                                         id="">
                                                                         <option value="-1"></option>
                                                                         @foreach ($skirtStyles as $style)
-                                                                            <option value="{{ $staff->id }}">
+                                                                            <option value="{{ $style->id }}">
                                                                                 {{ $style->name }}</option>
                                                                         @endforeach
                                                                     </select>
