@@ -1,14 +1,6 @@
 <?php
 
-use App\Models\Cloth;
-use App\Models\Customer;
-use App\Models\Neck;
-use App\Models\NeckStyleContainer;
-use App\Models\shoulder;
-use App\Models\ShoulderStyleContainer;
-use App\Models\Skirt;
-use App\Models\SkirtStyleContainer;
-use App\Models\Vaskates;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,13 +36,3 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/login', App\Livewire\Login::class)->name('login')->middleware('guest');
 
-
-Route::get("/test" , function(){
-    $v  = Cloth::find(6);
-   
-   
-    return $v->SleeveStyleContainer->where("clothing_type","cloth")->first()->sleeve_id;
-    
-    
- 
-});
