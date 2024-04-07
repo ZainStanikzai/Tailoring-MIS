@@ -216,11 +216,11 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-3 col-sm-3 col-3">
+                                                                <div class="col-md-4 col-sm-4 col-4">
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">قد</label>
-                                                                        <input step="0.5" type="number"
+                                                                        <input step="any" type="number"
                                                                             min="1" wire:model='height'
                                                                             max="150" class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -229,7 +229,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">سورین</label>
-                                                                        <input step="0.5" type="number"
+                                                                        <input step="any" type="number"
                                                                             min="1" wire:model='souren'
                                                                             max="150" class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -239,7 +239,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">کمر</label>
-                                                                        <input step="0.5" type="number"
+                                                                        <input step="any" type="number"
                                                                             min="1" wire:model='waist'
                                                                             max="150" class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -248,7 +248,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">پاچه</label>
-                                                                        <input step="0.5" type="number"
+                                                                        <input step="any" type="number"
                                                                             min="1" wire:model='leg'
                                                                             max="150" class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -256,7 +256,7 @@
                                                                     </div>
 
                                                                 </div>
-                                                                <div class="col-md-9 col-sm-9 col-9 p-0 ">
+                                                                <div class="col-md-8 col-sm-8 col-8 p-0 ">
                                                                     <textarea name="" wire:model='description' rows="5" class="form-control w-100 rounded-0"
                                                                         id="" placeholder="نوټ..."></textarea>
                                                                 </div>

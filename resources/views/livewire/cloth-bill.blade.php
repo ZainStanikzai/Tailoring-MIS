@@ -216,11 +216,11 @@
 
 
                                                         <div class="row">
-                                                            <div class="col-md-3 col-sm-3 col-3">
+                                                            <div class="col-md-4 col-sm-4 col-4">
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">قد</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='height' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -229,7 +229,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">شانه</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='shoulder' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -238,7 +238,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">استین</label>
-                                                                    <input type="number" step="0.5"
+                                                                    <input type="number" step="any"
                                                                         min="1"wire:model='sleeve'
                                                                         max="150" class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -247,7 +247,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">یخن</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='neck' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -256,7 +256,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">بغل</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='side' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -265,7 +265,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">زربغل</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='sideDown' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -274,7 +274,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">دامن</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='skirt' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -283,7 +283,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">تمبان</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='tomban' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -292,7 +292,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">پاچه</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='leg' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -301,7 +301,7 @@
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="validationCustom01">سورین</label>
-                                                                    <input type="number" step="0.5" min="1"
+                                                                    <input type="number" step="any" min="1"
                                                                         wire:model='soreen' max="150"
                                                                         class="form-control p-1"
                                                                         id="validationCustom01" placeholder="00"
@@ -309,7 +309,7 @@
                                                                 </div>
 
                                                             </div>
-                                                            <div class="col-md-6 col-sm-6 col-6 ">
+                                                            <div class="col-md-5 col-sm-5 col-5 ">
                                                                 <div class="d-flex align-items-baseline ">
                                                                     <label class="form-label" style="width:100px"
                                                                         for="">پټی</label>

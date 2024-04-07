@@ -128,65 +128,65 @@
 
 
                                     <div class="row">
-                                        <div class="col-md-3 col-sm-3 col-3">
+                                        <div class="col-md-4 col-sm-4 col-4">
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">قد</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='height' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">شانه</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='shoulder' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">آستین</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='sleeve' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">بغل</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='side' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">کمر</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='waist' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">سورین</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='surren' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">کراسب</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='crossSub' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width: 50px"
                                                     for="validationCustom01">کراس</label>
-                                                <input step="0.5" disabled type="number" min="1" max="150"
+                                                <input step="any" disabled type="number" min="1" max="150"
                                                     wire:model='cross' class="form-control p-1"
                                                     id="validationCustom01" placeholder="00" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6 col-6 ">
+                                        <div class="col-md-5 col-sm-5 col-5 ">
                                             <div class="d-flex align-items-baseline ">
                                                 <label class="form-label" style="width:100px"
                                                     for="validationCustom02">دامن</label>
