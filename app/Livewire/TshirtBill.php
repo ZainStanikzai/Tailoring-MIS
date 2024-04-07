@@ -193,10 +193,10 @@ class TshirtBill extends Component
             ]);
         }else{
             return view('livewire.tshirt-bill',[
-                'Tshirts'=>Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->latest()->paginate(50),
-                'totalRecord'=>Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->count(),
-                'totalCash' => Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->sum('paid'),
-                'totalBalance'=>Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->sum('balance')
+                'Tshirts'=>Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
+                'totalRecord'=>Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
+                'totalCash' => Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
+                'totalBalance'=>Tshirt::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
             ]);
         }
     }

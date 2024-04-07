@@ -177,10 +177,10 @@ class VaskatBill extends Component
             ]);
         }else{
             return view('livewire.vaskat-bill',[
-                'Vaskates'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->latest()->paginate(50),
-                'totalRecord'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->count(),
-                'totalCash' => Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->sum('paid'),
-                'totalBalance'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->sum('balance')
+                'Vaskates'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
+                'totalRecord'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
+                'totalCash' => Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
+                'totalBalance'=>Vaskates::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
             ]);
         }
     }

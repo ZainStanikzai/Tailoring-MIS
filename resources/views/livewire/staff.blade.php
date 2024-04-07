@@ -53,7 +53,8 @@
                                         <th>نوم</th>
                                         <th>نمبر</th>
                                         <th>د کار نیټه</th>
-                                        <th>تعداد د جوړو</th>
+                                        <th>پاتی جوړو</th>
+                                        <th>ګنډل شوی جوړو</th>
                                      
                                         <th>اخستل سوی پیسی</th>
                                       
@@ -75,6 +76,16 @@
                                                 $coats  = \App\Models\Coat::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
                                                 $panths  = \App\Models\Panth::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
                                                 $tshirts  = \App\Models\Tshirt::where("staff_id" , $Staff->id )->where("sewStatus","0")->count();
+                                                echo  $cloths + $vaskets +  $coats +  $panths + $tshirts;
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $cloths  = \App\Models\Cloth::where("staff_id" , $Staff->id )->where("sewStatus","1")->count();
+                                                $vaskets  = \App\Models\Vaskates::where("staff_id" , $Staff->id )->where("sewStatus","1")->count();
+                                                $coats  = \App\Models\Coat::where("staff_id" , $Staff->id )->where("sewStatus","1")->count();
+                                                $panths  = \App\Models\Panth::where("staff_id" , $Staff->id )->where("sewStatus","1")->count();
+                                                $tshirts  = \App\Models\Tshirt::where("staff_id" , $Staff->id )->where("sewStatus","1")->count();
                                                 echo  $cloths + $vaskets +  $coats +  $panths + $tshirts;
                                                 ?>
                                             </td>
