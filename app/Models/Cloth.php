@@ -66,7 +66,6 @@ class Cloth extends Model
         'sideDown',
         'skirt',
         'tumban',
-        'surren',
         'leg',
         'tumbanPocket',
         'sideDown',

@@ -189,13 +189,7 @@
                                                     class="form-control p-1" id="validationCustom01" placeholder="00"
                                                     required>
                                             </div>
-                                            <div class="d-flex align-items-baseline ">
-                                                <label class="form-label" style="width: 50px"
-                                                    for="validationCustom01">سورین</label>
-                                                <input  disabled type="number" step="any" min="1" wire:model='soreen'
-                                                    max="150" class="form-control p-1" id="validationCustom01"
-                                                    placeholder="00" required>
-                                            </div>
+                                           
 
                                         </div>
                                         <div class="col-md-5 col-sm-5 col-5 ">

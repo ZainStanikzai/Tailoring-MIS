@@ -64,7 +64,6 @@ class ClothBill extends Component
     public $side;
     public $sideDown;
     public $skirt;
-    public $surren;
     public $tomban;
     public $leg;
     public $soreen;
@@ -164,7 +163,6 @@ class ClothBill extends Component
                 "skirt" =>$this->skirt,
                 "tumban" =>$this->tomban,
                 "leg" =>$this->leg,
-                "surren" =>$this->soreen,
                 "tumbanPocket"=>$this->tombanPocket,
                 "sidePocketStyle_id"=>$this->sidePocketStyle_id,
                 "frontPocketStyle_id"=>$this->frontPocketStyle_id,

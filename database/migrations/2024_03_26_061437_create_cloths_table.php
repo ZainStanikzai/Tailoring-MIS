@@ -25,7 +25,6 @@ return new class extends Migration
             $table->float('sideDown',false,true);
             $table->float('skirt',false,true);
             $table->float('tumban',false,true);
-            $table->float('surren',false,true);
             $table->float('leg',false,true);
             $table->boolean('tumbanPocket')->default(0);
             $table->unsignedBigInteger('sidePocketStyle_id');

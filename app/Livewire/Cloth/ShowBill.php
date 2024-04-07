@@ -60,7 +60,6 @@ class ShowBill extends Component
     public $surren;
     public $tomban;
     public $leg;
-    public $soreen;
     public $tombanPocket = 0;
 
     public $qty = 0;
@@ -114,7 +113,6 @@ class ShowBill extends Component
         $this->surren = $InfoID->surren;
         $this->tomban = $InfoID->tumban;
         $this->leg  = $InfoID->leg;
-        $this->soreen = $InfoID->surren;
         $this->tombanPocket = $InfoID->tumbanPocket;
         $this->qty  = $InfoID->qty;
         $this->price  = $InfoID->price;
@@ -178,7 +176,6 @@ class ShowBill extends Component
             $object->skirt = $this->skirt;
             $object->tumban = $this->tomban;
             $object->leg = $this->leg;
-            $object->surren = $this->soreen;
             $object->tumbanPocket = $this->tombanPocket;
             $object->sidePocketStyle_id = $this->sidePocketStyle_id;
             $object->frontPocketStyle_id = $this->frontPocketStyle_id;
