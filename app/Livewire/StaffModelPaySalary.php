@@ -37,18 +37,12 @@ class StaffModelPaySalary extends Component
             $staff = ModelsStaff::find($this->staffId);
             DB::beginTransaction();
             $staffSalary = Salary::create(["staff_id" => $staff->id, "amount" => $this->amount]);
-
-            $staffOldSalary = $staff->salary;
-            $newSalary = $staffOldSalary + $this->amount;
-
-            $staff->salary = $newSalary;
-            $staff->save();
-
             session()->flash('success', "salary updated");
             $this->dispatch('salaryAdded');
             $this->reset();
             DB::commit();
         } catch (Exception $ex) {
+            DB::rollBack();
             session()->flash('success', $ex);
         }
     }

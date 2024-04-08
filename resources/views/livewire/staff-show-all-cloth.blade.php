@@ -105,7 +105,39 @@
                                             id="cloth" role="tabpanel" aria-labelledby="cloth-tab">
                                             <div class="card">
                                                 <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
 
+                                                                <th>د جامو ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                <th>اختیارونه</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($Cloths as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("cloths","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"cloth")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -277,64 +309,58 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane" id="completedCloth" role="tabpane2"
+                        <div class="tab-pane" id="completedCloth" role="tabpane1"
                             aria-labelledby="completedCloth-tab">
                             <div class="card">
                                 <div class="card-body " id="cutomerList">
-
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link {{ $activePanel == 'cloth' ? 'active' : '' }} "
-                                                id="completedCloth-tab" data-bs-toggle="tab"
-                                                data-bs-target="#completedCloth" type="button" role="tab"
-                                                aria-controls="completedClothcloth" aria-selected="true">
-                                                جامی <span
-                                                    class="text-muted mx-2 font-size-10">{{ $comallCloths }}</span>
+                                            <button class="nav-link active" id="comCloth-tab" data-bs-toggle="tab"
+                                                data-bs-target="#comCloth" type="button" role="tab"
+                                                aria-controls="comCloth" aria-selected="true">
+                                                جامی<span
+                                                class="text-muted mx-2 font-size-10">{{ $comallCloths }}</span>
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link {{ $activePanel == 'vasket' ? 'active' : '' }}"
-                                                id="completedClothvasket-tab" data-bs-toggle="tab"
-                                                data-bs-target="#completedClothvasket" type="button" role="tab"
-                                                aria-controls="completedClothvasket" aria-selected="false">
+                                            <button class="nav-link" id="comVaskate-tab" data-bs-toggle="tab"
+                                                data-bs-target="#comVaskate" type="button" role="tab"
+                                                aria-controls="comVaskate" aria-selected="false">
                                                 واسکټ<span
-                                                    class="text-muted mx-2 font-size-10">{{ $comallVaskets }}</span>
+                                                class="text-muted mx-2 font-size-10">{{ $comallVaskets }}</span>
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link {{ $activePanel == 'coat' ? 'active' : '' }}"
-                                                id="completedClothcoat-tab" data-bs-toggle="tab"
-                                                data-bs-target="#completedClothcoat" type="button" role="tab"
-                                                aria-controls="completedClothcoat" aria-selected="false">
+                                            <button class="nav-link" id="comCoat-tab" data-bs-toggle="tab"
+                                                data-bs-target="#comCoat" type="button" role="tab"
+                                                aria-controls="comCoat" aria-selected="false">
                                                 کوټ<span
-                                                    class="text-muted mx-2 font-size-10">{{ $comallCoats }}</span>
+                                                class="text-muted mx-2 font-size-10">{{ $comallCoats }}</span>
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link {{ $activePanel == 'cloth' ? 'panth' : '' }}"
-                                                id="completedClothpanth-tab" data-bs-toggle="tab"
-                                                data-bs-target="#completedClothpanth" type="button" role="tab"
-                                                aria-controls="completedClothpanth" aria-selected="false">
+                                            <button class="nav-link" id="comPanth-tab" data-bs-toggle="tab"
+                                                data-bs-target="#comPanth" type="button" role="tab"
+                                                aria-controls="comPanth" aria-selected="false">
                                                 پطلون<span
-                                                    class="text-muted mx-2 font-size-10">{{ $comallPanths }}</span>
+                                                class="text-muted mx-2 font-size-10">{{ $comallPanths }}</span>
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link {{ $activePanel == 'tshirt' ? 'active' : '' }}"
-                                                id="completedClothtshirt-tab" data-bs-toggle="tab"
-                                                data-bs-target="#completedClothtshirt" type="button" role="tab"
-                                                aria-controls="completedClothtshirt" aria-selected="false">
+                                            <button class="nav-link" id="comTshirt-tab" data-bs-toggle="tab"
+                                                data-bs-target="#comTshirt" type="button" role="tab"
+                                                aria-controls="comTshirt" aria-selected="false">
                                                 یخن قاق<span
-                                                    class="text-muted mx-2 font-size-10">{{ $comallTshirts }}</span>
+                                                class="text-muted mx-2 font-size-10">{{ $comallTshirts }}</span>
                                             </button>
                                         </li>
                                     </ul>
+
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                        <div class="tab-pane {{ $activePanel == 'cloth' ? 'active' : '' }}"
-                                            id="completedClothcloth" role="tabpane2"
-                                            aria-labelledby="completedClothcloth-tab">
+                                        <div class="tab-pane active" id="comCloth" role="tabpanel"
+                                            aria-labelledby="comCloth-tab">
                                             <div class="card">
                                                 <div class="card-body " id="cutomerList">
                                                     <table id="datatable"
@@ -342,12 +368,12 @@
                                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                         <thead>
                                                             <tr>
-
+                                    
                                                                 <th>د جامو ID</th>
                                                                 <th>مشتری</th>
                                                                 <th>نمبر</th>
                                                                 <th>د واپسی نیټه</th>
-                                                                {{-- <th>اختیارونه</th> --}}
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -359,24 +385,17 @@
                                                                         wire:click='showClothInfo("cloths","{{ $item->customer_number }}")'>
                                                                         {{ $item->customer_number }}</td>
                                                                     <td>{{ $item->sewDate }}</td>
-                                                                    {{-- <td>
-                                                                        <button
-                                                                            wire:click='completed({{ $item->id }},"cloth")'
-                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
-                                                                            class="btn btn-sm btn-primary ">مکمل یی
-                                                                            کړی</button>
-                                                                    </td> --}}
+                                                                    
                                                                 </tr>
                                                             @endforeach
-
+                                    
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane {{ $activePanel == 'vasket' ? 'active' : '' }}"
-                                            id="completedClothvasket" role="tabpane2"
-                                            aria-labelledby="completedClothvasket-tab">
+                                        <div class="tab-pane" id="comVaskate" role="tabpanel"
+                                            aria-labelledby="comVaskate-tab">
                                             <div class="card">
                                                 <div class="card-body " id="cutomerList">
                                                     <table id="datatable"
@@ -384,12 +403,12 @@
                                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                         <thead>
                                                             <tr>
-
+                                    
                                                                 <th>د واسکټ ID</th>
                                                                 <th>مشتری</th>
                                                                 <th>نمبر</th>
                                                                 <th>د واپسی نیټه</th>
-                                                                {{-- <th>اختیارونه</th> --}}
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -401,13 +420,7 @@
                                                                         wire:click='showClothInfo("vaskate","{{ $item->customer_number }}")'>
                                                                         {{ $item->customer_number }}</td>
                                                                     <td>{{ $item->sewDate }}</td>
-                                                                    {{-- <td>
-                                                                        <button
-                                                                            wire:click='completed({{ $item->id }},"vasket")'
-                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
-                                                                            class="btn btn-sm btn-primary ">مکمل یی
-                                                                            کړی</button>
-                                                                    </td> --}}
+                                                                    
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -415,9 +428,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane {{ $activePanel == 'coat' ? 'active' : '' }}"
-                                            id="completedClothcoat" role="tabpane2"
-                                            aria-labelledby="completedClothcoat-tab">
+                                        <div class="tab-pane" id="comCoat" role="tabpanel"
+                                            aria-labelledby="comCoat-tab">
                                             <div class="card">
                                                 <div class="card-body " id="cutomerList">
                                                     <table id="datatable"
@@ -425,12 +437,12 @@
                                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                         <thead>
                                                             <tr>
-
+                                    
                                                                 <th>د کوټ ID</th>
                                                                 <th>مشتری</th>
                                                                 <th>نمبر</th>
                                                                 <th>د واپسی نیټه</th>
-                                                                {{-- <th>اختیارونه</th> --}}
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -442,13 +454,7 @@
                                                                         wire:click='showClothInfo("coat","{{ $item->customer_number }}")'>
                                                                         {{ $item->customer_number }}</td>
                                                                     <td>{{ $item->sewDate }}</td>
-                                                                    {{-- <td>
-                                                                        <button
-                                                                            wire:click='completed({{ $item->id }},"coat")'
-                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
-                                                                            class="btn btn-sm btn-primary ">مکمل یی
-                                                                            کړی</button>
-                                                                    </td> --}}
+                                                                    
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -456,9 +462,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane {{ $activePanel == 'panth' ? 'active' : '' }}"
-                                            id="completedClothpanth" role="tabpane2"
-                                            aria-labelledby="completedClothpanth-tab">
+                                        <div class="tab-pane" id="comPanth" role="tabpanel"
+                                            aria-labelledby="comPanth-tab">
                                             <div class="card">
                                                 <div class="card-body " id="cutomerList">
                                                     <table id="datatable"
@@ -466,12 +471,12 @@
                                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                         <thead>
                                                             <tr>
-
+                                    
                                                                 <th>د پطلون ID</th>
                                                                 <th>مشتری</th>
                                                                 <th>نمبر</th>
                                                                 <th>د واپسی نیټه</th>
-                                                                {{-- <th>اختیارونه</th> --}}
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -483,13 +488,7 @@
                                                                         wire:click='showClothInfo("panth","{{ $item->customer_number }}")'>
                                                                         {{ $item->customer_number }}</td>
                                                                     <td>{{ $item->sewDate }}</td>
-                                                                    {{-- <td>
-                                                                        <button
-                                                                            wire:click='completed({{ $item->id }},"panth")'
-                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
-                                                                            class="btn btn-sm btn-primary ">مکمل یی
-                                                                            کړی</button>
-                                                                    </td> --}}
+                                                                    
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -497,9 +496,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane {{ $activePanel == 'tshirt' ? 'active' : '' }}"
-                                            id="completedClothtshirt" role="tabpane2"
-                                            aria-labelledby="completedClothtshirt-tab">
+                                        <div class="tab-pane" id="comTshirt" role="tabpanel"
+                                            aria-labelledby="comTshirt-tab">
                                             <div class="card">
                                                 <div class="card-body " id="cutomerList">
                                                     <table id="datatable"
@@ -507,12 +505,12 @@
                                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                         <thead>
                                                             <tr>
-
+                                    
                                                                 <th>د یخن قاق ID</th>
                                                                 <th>مشتری</th>
                                                                 <th>نمبر</th>
                                                                 <th>د واپسی نیټه</th>
-                                                                {{-- <th>اختیارونه</th> --}}
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -524,13 +522,7 @@
                                                                         wire:click='showClothInfo("tshirt","{{ $item->customer_number }}")'>
                                                                         {{ $item->customer_number }}</td>
                                                                     <td>{{ $item->sewDate }}</td>
-                                                                    {{-- <td>
-                                                                        <button
-                                                                            wire:click='completed({{ $item->id }},"tshirt")'
-                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
-                                                                            class="btn btn-sm btn-primary ">مکمل یی
-                                                                            کړی</button>
-                                                                    </td> --}}
+                                                                   
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -542,11 +534,12 @@
 
 
 
+
                                 </div>
                             </div>
                         </div>
 
-                        <div class="tab-pane" id="salary" role="tabpane3">
+                        <div class="tab-pane" id="salary" role="tabpane">
                             <div class="card">
                                 <div class="card-body " id="">
                                     <table id="datatable"
@@ -562,9 +555,9 @@
                                         <tbody>
                                             @foreach ($Salary as $item)
                                                 <tr>
-                                                    <td>{{$item->id}}</td>
-                                                    <td>{{$item->amount}}</td>
-                                                    <td>{{$item->created_at->format("d-m-Y")}}</td>
+                                                    <td>{{ $item->id }}</td>
+                                                    <td>{{ $item->amount }}</td>
+                                                    <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

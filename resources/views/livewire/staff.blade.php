@@ -210,7 +210,7 @@
                                                 ?>
                                             </td>
                                             <td onclick="showSalaryPayForm({{$Staff->id}})">
-                                                {{ $Staff->salary }}
+                                                {{ $Staff->Salary->sum("amount") }}
                                                 <i class="uil uil-money-withdraw text-primary float-end font-size-20 "
                                                     style="cursor: pointer" 
                                                     data-bs-toggle="modal" data-bs-target="#staffPayModal"></i>

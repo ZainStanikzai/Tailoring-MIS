@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Staff;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/login', App\Livewire\Login::class)->name('login')->middleware('guest');
 
+Route::get("/test" , function(){
+    $staff = Staff::find(6);
+    return $staff->Salary->sum("amount");
+});
