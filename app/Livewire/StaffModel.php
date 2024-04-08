@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Staff as ModelsStaff;
 use Livewire\Attributes\Validate;
 use Exception;
+use Livewire\Attributes\On;
 
 class StaffModel extends Component
 {
@@ -45,9 +46,26 @@ class StaffModel extends Component
         $this->dispatch('staffCreated', id:$newStaff->id,name:$newStaff->name,phone:$newStaff->phone,created_at:$newStaff->created_at);
     }
     
-    public function edite($id){
-        dd($id);
+    public $staffSelctedID;
+    #[On('loadStaffInfo')]
+    public function loadStaffInfo($InfoID){
+        $staff  = ModelsStaff::find($InfoID);
+        $this->staffSelctedID=$InfoID;
+        $this->name  = $staff->name;
+        $this->phone  = $staff->phone;
+        $this->modelClass = "show";
+        $this->modelStyle = "display:block";
     }
+
+    public function update(){
+        $staff = ModelsStaff::find($this->staffSelctedID);
+        $staff->name = $this->name;
+        $staff->phone = $this->phone;
+        $staff->save();
+        session()->flash("success","updated");
+        $this->dispatch("staffUpdated");
+    }
+    
     public function render()
     {
         return view('livewire.staff-model');

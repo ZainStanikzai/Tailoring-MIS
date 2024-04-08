@@ -20,210 +20,556 @@
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12col-12">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs" id="generalTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link {{$activePanel == "cloth" ? "active" : ""}} " id="cloth-tab" data-bs-toggle="tab" data-bs-target="#cloth"
-                                type="button" role="tab" aria-controls="cloth" aria-selected="true">
-                                جامی <span class="text-muted mx-2 font-size-10">{{$allCloths}}</span>
+                            <button class="nav-link active" id="unCompletedCloth-tab" data-bs-toggle="tab"
+                                data-bs-target="#unCompletedCloth" type="button" role="tab"
+                                aria-controls="unCompletedCloth" aria-selected="true">
+                                پاتی جامی <span
+                                    class="text-muted mx-2 font-size-10">{{ $allCloths + $allCoats + $allVaskets + $allPanths + $allTshirts }}</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link {{$activePanel == "vasket" ? "active" : ""}}" id="vasket-tab" data-bs-toggle="tab" data-bs-target="#vasket"
-                                type="button" role="tab" aria-controls="vasket" aria-selected="false">
-                                واسکټ<span class="text-muted mx-2 font-size-10">{{$allVaskets}}</span>
+                            <button class="nav-link " id="completedCloth-tab" data-bs-toggle="tab"
+                                data-bs-target="#completedCloth" type="button" role="tab"
+                                aria-controls="completedCloth" aria-selected="true">
+                                ګنډل شوی جامی <span
+                                    class="text-muted mx-2 font-size-10">{{ $comallCloths + $comallCoats + $comallVaskets + $comallPanths + $comallTshirts }}</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link {{$activePanel == "coat" ? "active" : ""}}" id="coat-tab" data-bs-toggle="tab" data-bs-target="#coat"
-                                type="button" role="tab" aria-controls="coat" aria-selected="false">
-                                کوټ<span class="text-muted mx-2 font-size-10">{{$allCoats}}</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link {{$activePanel == "cloth" ? "panth" : ""}}" id="panth-tab" data-bs-toggle="tab" data-bs-target="#panth"
-                                type="button" role="tab" aria-controls="panth" aria-selected="false">
-                                پطلون<span class="text-muted mx-2 font-size-10">{{$allPanths}}</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link {{$activePanel == "tshirt" ? "active" : ""}}" id="tshirt-tab" data-bs-toggle="tab" data-bs-target="#tshirt"
-                                type="button" role="tab" aria-controls="tshirt" aria-selected="false">
-                                یخن قاق<span class="text-muted mx-2 font-size-10">{{$allTshirts}}</span>
+                            <button class="nav-link " id="salary-tab" data-bs-toggle="tab" data-bs-target="#salary"
+                                type="button" role="tab" aria-controls="salary" aria-selected="true">
+                                د پیسو د اخستلو تاریخجه<span class="text-muted mx-2 font-size-10"></span>
                             </button>
                         </li>
                     </ul>
 
 
-
-
-
-
-                    <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane {{$activePanel == "cloth" ? "active" : ""}}" id="cloth" role="tabpanel" aria-labelledby="cloth-tab">
+                        <div class="tab-pane active" id="unCompletedCloth" role="tabpane1"
+                            aria-labelledby="unCompletedCloth-tab">
+                            <div class="card">
+                                <div class="card-body " id="">
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'cloth' ? 'active' : '' }} "
+                                                id="cloth-tab" data-bs-toggle="tab" data-bs-target="#cloth"
+                                                type="button" role="tab" aria-controls="cloth"
+                                                aria-selected="true">
+                                                جامی <span
+                                                    class="text-muted mx-2 font-size-10">{{ $allCloths }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'vasket' ? 'active' : '' }}"
+                                                id="vasket-tab" data-bs-toggle="tab" data-bs-target="#vasket"
+                                                type="button" role="tab" aria-controls="vasket"
+                                                aria-selected="false">
+                                                واسکټ<span
+                                                    class="text-muted mx-2 font-size-10">{{ $allVaskets }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'coat' ? 'active' : '' }}"
+                                                id="coat-tab" data-bs-toggle="tab" data-bs-target="#coat"
+                                                type="button" role="tab" aria-controls="coat"
+                                                aria-selected="false">
+                                                کوټ<span class="text-muted mx-2 font-size-10">{{ $allCoats }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'cloth' ? 'panth' : '' }}"
+                                                id="panth-tab" data-bs-toggle="tab" data-bs-target="#panth"
+                                                type="button" role="tab" aria-controls="panth"
+                                                aria-selected="false">
+                                                پطلون<span
+                                                    class="text-muted mx-2 font-size-10">{{ $allPanths }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'tshirt' ? 'active' : '' }}"
+                                                id="tshirt-tab" data-bs-toggle="tab" data-bs-target="#tshirt"
+                                                type="button" role="tab" aria-controls="tshirt"
+                                                aria-selected="false">
+                                                یخن قاق<span
+                                                    class="text-muted mx-2 font-size-10">{{ $allTshirts }}</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane {{ $activePanel == 'cloth' ? 'active' : '' }}"
+                                            id="cloth" role="tabpanel" aria-labelledby="cloth-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'vasket' ? 'active' : '' }}"
+                                            id="vasket" role="tabpanel" aria-labelledby="vasket-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د واسکټ ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                <th>اختیارونه</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($Vaskets as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("vaskate","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"vasket")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'coat' ? 'active' : '' }}"
+                                            id="coat" role="tabpanel" aria-labelledby="coat-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د کوټ ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                <th>اختیارونه</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($Coats as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("coat","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"coat")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'panth' ? 'active' : '' }}"
+                                            id="panth" role="tabpanel" aria-labelledby="panth-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د پطلون ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                <th>اختیارونه</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($Panths as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("panth","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"panth")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'tshirt' ? 'active' : '' }}"
+                                            id="tshirt" role="tabpanel" aria-labelledby="tshirt-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د یخن قاق ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                <th>اختیارونه</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($Tshirts as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("tshirt","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"tshirt")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="completedCloth" role="tabpane2"
+                            aria-labelledby="completedCloth-tab">
                             <div class="card">
                                 <div class="card-body " id="cutomerList">
-                                    <table id="datatable" class="table staffDatatable table-hover dt-responsive nowrap "
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'cloth' ? 'active' : '' }} "
+                                                id="completedCloth-tab" data-bs-toggle="tab"
+                                                data-bs-target="#completedCloth" type="button" role="tab"
+                                                aria-controls="completedClothcloth" aria-selected="true">
+                                                جامی <span
+                                                    class="text-muted mx-2 font-size-10">{{ $comallCloths }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'vasket' ? 'active' : '' }}"
+                                                id="completedClothvasket-tab" data-bs-toggle="tab"
+                                                data-bs-target="#completedClothvasket" type="button" role="tab"
+                                                aria-controls="completedClothvasket" aria-selected="false">
+                                                واسکټ<span
+                                                    class="text-muted mx-2 font-size-10">{{ $comallVaskets }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'coat' ? 'active' : '' }}"
+                                                id="completedClothcoat-tab" data-bs-toggle="tab"
+                                                data-bs-target="#completedClothcoat" type="button" role="tab"
+                                                aria-controls="completedClothcoat" aria-selected="false">
+                                                کوټ<span
+                                                    class="text-muted mx-2 font-size-10">{{ $comallCoats }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'cloth' ? 'panth' : '' }}"
+                                                id="completedClothpanth-tab" data-bs-toggle="tab"
+                                                data-bs-target="#completedClothpanth" type="button" role="tab"
+                                                aria-controls="completedClothpanth" aria-selected="false">
+                                                پطلون<span
+                                                    class="text-muted mx-2 font-size-10">{{ $comallPanths }}</span>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link {{ $activePanel == 'tshirt' ? 'active' : '' }}"
+                                                id="completedClothtshirt-tab" data-bs-toggle="tab"
+                                                data-bs-target="#completedClothtshirt" type="button" role="tab"
+                                                aria-controls="completedClothtshirt" aria-selected="false">
+                                                یخن قاق<span
+                                                    class="text-muted mx-2 font-size-10">{{ $comallTshirts }}</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane {{ $activePanel == 'cloth' ? 'active' : '' }}"
+                                            id="completedClothcloth" role="tabpane2"
+                                            aria-labelledby="completedClothcloth-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د جامو ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                {{-- <th>اختیارونه</th> --}}
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($comCloths as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("cloths","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    {{-- <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"cloth")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td> --}}
+                                                                </tr>
+                                                            @endforeach
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'vasket' ? 'active' : '' }}"
+                                            id="completedClothvasket" role="tabpane2"
+                                            aria-labelledby="completedClothvasket-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د واسکټ ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                {{-- <th>اختیارونه</th> --}}
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($comVaskets as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("vaskate","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    {{-- <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"vasket")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td> --}}
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'coat' ? 'active' : '' }}"
+                                            id="completedClothcoat" role="tabpane2"
+                                            aria-labelledby="completedClothcoat-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د کوټ ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                {{-- <th>اختیارونه</th> --}}
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($comCoats as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("coat","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    {{-- <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"coat")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td> --}}
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'panth' ? 'active' : '' }}"
+                                            id="completedClothpanth" role="tabpane2"
+                                            aria-labelledby="completedClothpanth-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د پطلون ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                {{-- <th>اختیارونه</th> --}}
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($comPanths as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("panth","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    {{-- <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"panth")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td> --}}
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane {{ $activePanel == 'tshirt' ? 'active' : '' }}"
+                                            id="completedClothtshirt" role="tabpane2"
+                                            aria-labelledby="completedClothtshirt-tab">
+                                            <div class="card">
+                                                <div class="card-body " id="cutomerList">
+                                                    <table id="datatable"
+                                                        class="table staffDatatable table-hover dt-responsive nowrap "
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>د یخن قاق ID</th>
+                                                                <th>مشتری</th>
+                                                                <th>نمبر</th>
+                                                                <th>د واپسی نیټه</th>
+                                                                {{-- <th>اختیارونه</th> --}}
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($comTshirts as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->customer_name }}</td>
+                                                                    <td class="text-success" style="cursor: pointer"
+                                                                        wire:click='showClothInfo("tshirt","{{ $item->customer_number }}")'>
+                                                                        {{ $item->customer_number }}</td>
+                                                                    <td>{{ $item->sewDate }}</td>
+                                                                    {{-- <td>
+                                                                        <button
+                                                                            wire:click='completed({{ $item->id }},"tshirt")'
+                                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟'
+                                                                            class="btn btn-sm btn-primary ">مکمل یی
+                                                                            کړی</button>
+                                                                    </td> --}}
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="salary" role="tabpane3">
+                            <div class="card">
+                                <div class="card-body " id="">
+                                    <table id="datatable"
+                                        class="table staffDatatable table-hover dt-responsive nowrap "
                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead >
+                                        <thead>
                                             <tr>
-                                                
-                                                <th>د جامو ID</th>
-                                                <th>مشتری</th>
-                                                <th>نمبر</th>
-                                                <th>د واپسی نیټه</th>
-                                                <th>اختیارونه</th>
+                                                <th>#</th>
+                                                <th>د پیسو اندازه</th>
+                                                <th>تاریخ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($Cloths as $item)
+                                            @foreach ($Salary as $item)
                                                 <tr>
                                                     <td>{{$item->id}}</td>
-                                                    <td>{{$item->customer_name}}</td>
-                                                    <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("cloths","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
-                                                    <td>{{$item->sewDate}}</td>
-                                                    <td>
-                                                        <button  wire:click='completed({{ $item->id }},"cloth")'
-                                                            wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟' class="btn btn-sm btn-primary ">مکمل یی کړی</button>
-                                                    </td>
+                                                    <td>{{$item->amount}}</td>
+                                                    <td>{{$item->created_at->format("d-m-Y")}}</td>
                                                 </tr>
                                             @endforeach
-                                            
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane {{$activePanel == "vasket" ? "active" : ""}}" id="vasket" role="tabpanel" aria-labelledby="vasket-tab">
-                            <div class="card">
-                                <div class="card-body " id="cutomerList">
-                                    <table id="datatable" class="table staffDatatable table-hover dt-responsive nowrap "
-                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead >
-                                            <tr>
-                                              
-                                                <th>د واسکټ ID</th>
-                                                <th>مشتری</th>
-                                                <th>نمبر</th>
-                                                <th>د واپسی نیټه</th>
-                                                <th>اختیارونه</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($Vaskets as $item)
-                                            <tr>
-                                                <td>{{$item->id}}</td>
-                                                <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("vaskate","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
-                                                <td>{{$item->sewDate}}</td>
-                                                <td>
-                                                    <button  wire:click='completed({{ $item->id }},"vasket")'
-                                                        wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟' class="btn btn-sm btn-primary ">مکمل یی کړی</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane {{$activePanel == "coat" ? "active" : ""}}" id="coat" role="tabpanel" aria-labelledby="coat-tab">
-                            <div class="card">
-                                <div class="card-body " id="cutomerList">
-                                    <table id="datatable" class="table staffDatatable table-hover dt-responsive nowrap "
-                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead >
-                                            <tr>
-                                               
-                                                <th>د کوټ ID</th>
-                                                <th>مشتری</th>
-                                                <th>نمبر</th>
-                                                <th>د واپسی نیټه</th>
-                                                <th>اختیارونه</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($Coats as $item)
-                                            <tr>
-                                                <td>{{$item->id}}</td>
-                                                <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("coat","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
-                                                <td>{{$item->sewDate}}</td>
-                                                <td>
-                                                    <button  wire:click='completed({{ $item->id }},"coat")'
-                                                        wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟' class="btn btn-sm btn-primary ">مکمل یی کړی</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane {{$activePanel == "panth" ? "active" : ""}}" id="panth" role="tabpanel" aria-labelledby="panth-tab">
-                            <div class="card">
-                                <div class="card-body " id="cutomerList">
-                                    <table id="datatable" class="table staffDatatable table-hover dt-responsive nowrap "
-                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead >
-                                            <tr>
-                                              
-                                                <th>د پطلون ID</th>
-                                                <th>مشتری</th>
-                                                <th>نمبر</th>
-                                                <th>د واپسی نیټه</th>
-                                                <th>اختیارونه</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($Panths as $item)
-                                            <tr>
-                                                <td>{{$item->id}}</td>
-                                                <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("panth","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
-                                                <td>{{$item->sewDate}}</td>
-                                                <td>
-                                                    <button  wire:click='completed({{ $item->id }},"panth")'
-                                                        wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟' class="btn btn-sm btn-primary ">مکمل یی کړی</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane {{$activePanel == "tshirt" ? "active" : ""}}" id="tshirt" role="tabpanel" aria-labelledby="tshirt-tab">
-                            <div class="card">
-                                <div class="card-body " id="cutomerList">
-                                    <table id="datatable" class="table staffDatatable table-hover dt-responsive nowrap "
-                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead >
-                                            <tr>
-                                              
-                                                <th>د یخن قاق ID</th>
-                                                <th>مشتری</th>
-                                                <th>نمبر</th>
-                                                <th>د واپسی نیټه</th>
-                                                <th>اختیارونه</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($Tshirts as $item)
-                                            <tr>
-                                                <td>{{$item->id}}</td>
-                                                <td>{{$item->customer_name}}</td>
-                                                <td  class="text-success" style="cursor: pointer" wire:click='showClothInfo("tshirt","{{$item->customer_number}}")'> {{$item->customer_number}}</td>
-                                                <td>{{$item->sewDate}}</td>
-                                                <td>
-                                                    <button  wire:click='completed({{ $item->id }},"tshirt")'
-                                                        wire:confirm='ایا غواړی چی دا فرمایش مکمل کړی؟' class="btn btn-sm btn-primary ">مکمل یی کړی</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+
                                 </div>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Cloth;
 use App\Models\Coat;
 use App\Models\Panth;
+use App\Models\Salary;
 use App\Models\Staff;
 use App\Models\Tshirt;
 use App\Models\Vaskates;
@@ -60,6 +61,19 @@ class StaffShowAllCloth extends Component
             "allVaskets"=> Vaskates::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","0")->count(),
             "allPanths"=> Panth::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","0")->count(),
             "allTshirts"=> Tshirt::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","0")->count(),
+
+            "comCloths"=> Cloth::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->latest()->get(),
+            "comCoats"=> Coat::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->latest()->get(),
+            "comVaskets"=> Vaskates::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->latest()->get(),
+            "comPanths"=> Panth::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->latest()->get(),
+            "comTshirts"=> Tshirt::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->latest()->get(),
+            "comallCloths"=> Cloth::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->count(),
+            "comallCoats"=> Coat::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->count(),
+            "comallVaskets"=> Vaskates::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->count(),
+            "comallPanths"=> Panth::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->count(),
+            "comallTshirts"=> Tshirt::where("staff_id",$this->ActiveStaff->id)->where("sewStatus","1")->count(),
+
+            "Salary"=>Salary::where("staff_id",$this->ActiveStaff->id)->latest()->get(),
 
 
         ]);

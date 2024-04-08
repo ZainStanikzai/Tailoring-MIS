@@ -150,10 +150,10 @@ class PanthBill extends Component
             ]);
         }else{
             return view('livewire.panth-bill',[
-                'Panths'=>Panth::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
-                'totalRecord'=>Panth::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
-                'totalCash' => Panth::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
-                'totalBalance'=>Panth::where("customer_number","like","%$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
+                'Panths'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
+                'totalRecord'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
+                'totalCash' => Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
+                'totalBalance'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
             ]);
         }
     }

@@ -112,20 +112,20 @@
              </div>
          </div>
      </div>
+     @script
      <script>
          $(document).ready(function() {
-             // 
-             window.addEventListener('salaryAdedd', event => {
-                 var oldSalary = $(".staffPayTablePayItem-id-" + event.detail.id).text();
-                 var newSalary = $(".staffPayTablePayItem-id-" + event.detail.id).html(parseInt(oldSalary) + parseInt(event.detail.salary)+'\
-                                                     <i class="uil uil-money-withdraw text-primary float-end font-size-20 "\
-                                                         style="cursor: pointer" data-id="'+event.detail.id+'"\
-                                                         data-bs-toggle="modal" data-bs-target="#staffPayModal"></i>');
-                 $("#staffPayModal").modal('hide');
-                 $(".modal-backdrop").hide();
-             })
+             $("#staffPayModal").on('show.bs.modal', function() {
+                 setTimeout(() => {
+                     $wire.dispatch('loadStaffInfoID', {
+                         InfoID: InfoID
+                     });
+                 }, 0);
+ 
+             });
          });
      </script>
+ @endscript
  </div>
 
  {{-- end --}}
