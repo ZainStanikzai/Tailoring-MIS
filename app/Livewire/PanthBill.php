@@ -51,15 +51,49 @@ class PanthBill extends Component
 
 
 
+    public $customerID;
+    public function searchForCustomer($val){
+       
+        $customer = Customer::where("id",$val)->orWhere("numbers",$val)->first();
+        if(!empty($customer)){
+            $this->reset();
+            $this->initData();
+            $this->customerID = $val;
+            $InfoID = Panth::where("customer_id",$val)->orWhere("customer_number",$val)->first();
+            $this->customerName = $customer->name;
+            $this->customerPhone = $customer->numbers;           
+            if(!empty($InfoID)){
+                $this->lastID = $InfoID->id;
+                $this->staff_id = $InfoID->staff_id;
+                $this->height = $InfoID->height;
+                $this->souren = $InfoID->sourin;
+                $this->waist = $InfoID->waist;
+                $this->leg = $InfoID->leg;  
+               
+            }else{
+                $this->lastID = 1;
+            }
+        }else{
+            session()->flash("error","په دی نمبر مشتری وجود نلری."); 
+            $this->reset();
+            $this->initData();  
+        }
+        $this->modelClass = "show";
+        $this->modelStyle = "display: block;";
+        $this->resetPage();
+       
+        
+    }
+
+
     public function create(){
         $this->modelClass = "show";
         $this->modelStyle = "display: block;";
         $this->validate();
         try {
             DB::beginTransaction();
-            $newCustomer = Customer::create(['name'=>$this->customerName, 'numbers'=>$this->customerPhone]);
             $newRecord = Panth::create([
-                "customer_id"=>$newCustomer->id,
+                "customer_id"=>$this->customerID,
                 "customer_name" =>$this->customerName,
                 "customer_number" =>$this->customerPhone,
                 "staff_id"=>$this->staff_id,
@@ -105,7 +139,6 @@ class PanthBill extends Component
     public function delete(Panth $id){
         try{
             DB::beginTransaction();
-            $id->Customer->delete();
             $id->delete();
             DB::commit();
             $this->resetPage();
@@ -150,10 +183,10 @@ class PanthBill extends Component
             ]);
         }else{
             return view('livewire.panth-bill',[
-                'Panths'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
-                'totalRecord'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
-                'totalCash' => Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
-                'totalBalance'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
+                'Panths'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->latest()->paginate(50),
+                'totalRecord'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->count(),
+                'totalCash' => Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('paid'),
+                'totalBalance'=>Panth::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('balance')
             ]);
         }
     }

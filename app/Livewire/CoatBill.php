@@ -254,10 +254,10 @@ class CoatBill extends Component
             ]);
         }else{
             return view('livewire.coat-bill',[
-                'Coats'=>Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
-                'totalRecord'=>Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
-                'totalCash' => Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
-                'totalBalance'=>Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
+                'Coats'=>Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->latest()->paginate(50),
+                'totalRecord'=>Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->count(),
+                'totalCash' => Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('paid'),
+                'totalBalance'=>Coat::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('balance')
             ]);
         }
     }

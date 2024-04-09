@@ -182,7 +182,7 @@
                                                                                         <label class="form-label"
                                                                                             style="width: 40px"
                                                                                             for="validationCustom01">نوم</label>
-                                                                                        <input {{$customerID == "" ? "disabled" : ""}} type="text"
+                                                                                        <input  disabled type="text"
                                                                                             min="1"
                                                                                             wire:model='customerName'
                                                                                             class="form-control border w-100"
@@ -199,7 +199,7 @@
                                                                                         <label class="form-label"
                                                                                             style="width: 40px"
                                                                                             for="validationCustom01">مبایل</label>
-                                                                                        <input {{$customerID == "" ? "disabled" : ""}} type="number"
+                                                                                        <input disabled type="number"
                                                                                             min="0700000000"
                                                                                             wire:model='customerPhone'
                                                                                             max="0799999999"

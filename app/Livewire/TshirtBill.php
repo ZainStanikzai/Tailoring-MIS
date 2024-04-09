@@ -61,21 +61,85 @@ class TshirtBill extends Component
     public $balance = 0;
     public $description;
 
-    #[Validate('required',message:"کارکوونکی انتخاب کری.")]
+    // #[Validate('required',message:"کارکوونکی انتخاب کری.")]
     public $staff_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $stripStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $neckStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $skirtStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $shoulderStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $sleeveStyle_id;
    
     public $modelClass;
     public $modelStyle;
+
+
+    public $customerID;
+    public function searchForCustomer($val){
+       
+        $customer = Customer::where("id",$val)->orWhere("numbers",$val)->first();
+        if(!empty($customer)){
+            $this->reset();
+            $this->initData();
+            $this->customerID = $val;
+            $InfoID = Tshirt::where("customer_id",$val)->orWhere("customer_number",$val)->first();
+            $this->customerName = $customer->name;
+            $this->customerPhone = $customer->numbers;           
+            if(!empty($InfoID)){
+                $this->lastID = $InfoID->id;
+                $this->staff_id = $InfoID->staff_id;
+                $this->height = $InfoID->height;
+                $this->shoulder = $InfoID->shoulder;
+                $this->sleeve = $InfoID->sleeve;
+                $this->waist = $InfoID->waist;
+                $this->sideDown   = $InfoID->sideDown;
+                $this->skirt = $InfoID->skirt;
+                $this->neck = $InfoID->neck;
+               
+                try {
+                    $this->stripStyle_id = Strip::find($InfoID->StripStyleContainer->where("clothing_type", "tshirt")->first()->strip_id)->id;
+                } catch (Exception) {
+                    $this->stripStyle_id = "";
+                }
+                try {
+                    $this->neckStyle_id = Neck::find($InfoID->NeckStyleContainer->where("clothing_type", "tshirt")->first()->neck_id)->id;
+                } catch (Exception) {
+                    $this->neckStyle_id = "";
+                }
+                try {
+                    $this->skirtStyle_id = Skirt::find($InfoID->SkirtStyleContainer->where("clothing_type", "tshirt")->first()->skirt_id)->id;
+                } catch (Exception) {
+                    $this->skirtStyle_id = "";
+                }
+                try {
+                    $this->shoulderStyle_id = Shoulder::find($InfoID->ShoulderStyleContainer->where("clothing_type", "tshirt")->first()->shoulder_id)->id;
+                } catch (Exception) {
+                    $this->shoulderStyle_id = "";
+                }
+                try {
+                    $this->sleeveStyle_id = Sleeve::find($InfoID->SleeveStyleContainer->where("clothing_type", "tshirt")->first()->sleeve_id)->id;
+                } catch (Exception) {
+                    $this->sleeveStyle_id = "";
+                }    
+            }else{
+                $this->lastID = 1;
+            }
+        }else{
+            $this->reset();
+            $this->initData();  
+            session()->flash("error","په دی نمبر مشتری وجود نلری."); 
+        }
+        $this->modelClass = "show";
+        $this->modelStyle = "display: block;";
+        $this->resetPage();
+       
+        
+    }
+
 
     public function initData(){
         $this->skirtStyles = Skirt::where("clothing_type","tshirt")->latest()->get();
@@ -102,9 +166,9 @@ class TshirtBill extends Component
         $this->validate();
         try {
             DB::beginTransaction();
-            $newCustomer = Customer::create(['name'=>$this->customerName, 'numbers'=>$this->customerPhone]);
+        
             $newRecord = Tshirt::create([
-                "customer_id"=>$newCustomer->id,
+                "customer_id"=>$this->customerID,
                 "customer_name" =>$this->customerName,
                 "customer_number" =>$this->customerPhone,
                 "staff_id"=>$this->staff_id,
@@ -153,7 +217,7 @@ class TshirtBill extends Component
             $id->SkirtStyleContainer->where("clothing_type","tshirt")->first()->delete();
             $id->ShoulderStyleContainer->where("clothing_type","tshirt")->first()->delete();
             $id->SleeveStyleContainer->where("clothing_type","tshirt")->first()->delete();
-            $id->Customer->delete();
+           
             $id->delete();
             DB::commit();
             $this->resetPage();
@@ -193,10 +257,10 @@ class TshirtBill extends Component
             ]);
         }else{
             return view('livewire.tshirt-bill',[
-                'Tshirts'=>Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
-                'totalRecord'=>Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
-                'totalCash' => Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
-                'totalBalance'=>Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
+                'Tshirts'=>Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->latest()->paginate(50),
+                'totalRecord'=>Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->count(),
+                'totalCash' => Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('paid'),
+                'totalBalance'=>Tshirt::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('balance')
             ]);
         }
     }
