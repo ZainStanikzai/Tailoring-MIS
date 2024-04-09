@@ -24,6 +24,13 @@ class VaskatBill extends Component
 
     use WithPagination;
 
+
+
+
+
+
+
+    
    
 
    
@@ -77,6 +84,58 @@ class VaskatBill extends Component
             $this->vasketLastID = 1;    
         }
     }
+
+    public $customerID;
+    public function searchForCustomer($val){
+       
+        $customer = Customer::where("id",$val)->orWhere("numbers",$val)->first();
+        if(!empty($customer)){
+            $this->reset();
+            $this->initData();
+            $this->customerID = $val;
+            $InfoID = Vaskates::where("customer_id",$val)->orWhere("customer_number",$val)->first();
+            $this->customerName = $customer->name;
+            $this->customerPhone = $customer->numbers;           
+            if(!empty($InfoID)){
+                $this->height = $InfoID->height;
+                $this->shoulder = $InfoID->shoulder;
+                $this->side = $InfoID->side;
+                $this->waist = $InfoID->waist;
+                $this->neck = $InfoID->neck;
+              
+                $this->staff_id = $InfoID->staff_id;
+    
+                $this->vasketLastID = $InfoID->id;
+                
+                try {
+                    $this->neckStyle_id = Neck::find($InfoID->NeckContainer->where("clothing_type", "vasket")->first()->neck_id)->id;
+                } catch (Exception) {
+                    $this->neckStyle_id = "";
+                }
+                try {
+                    $this->skirtStyle_id = Skirt::find($InfoID->SkirtContainer->where("clothing_type", "vasket")->first()->skirt_id)->id;
+                } catch (Exception) {
+                    $this->skirtStyle_id = "";
+                }
+                try {
+                    $this->shoulderStyle_id = Shoulder::find($InfoID->ShoulderContainer->where("clothing_type", "vasket")->first()->shoulder_id)->id;
+                } catch (Exception) {
+                    $this->shoulderStyle_id = "";
+                }
+            }else{
+                $this->vasketLastID = 1;
+            }
+        }else{
+            $this->reset();
+            $this->initData(); 
+            session()->flash("error","په دی نمبر مشتری وجود نلری."); 
+        }
+        $this->modelClass = "show";
+        $this->modelStyle = "display: block;";
+        $this->resetPage();
+       
+        
+    }
     #[Url(as: 'q')]
     public $query;
     public function search($term){
@@ -99,9 +158,9 @@ class VaskatBill extends Component
         $this->validate();
         try {
             DB::beginTransaction();
-            $newCustomer = Customer::create(['name'=>$this->customerName, 'numbers'=>$this->customerPhone]);
+           
             $newVasket = Vaskates::create([
-                "customer_id"=>$newCustomer->id,
+                "customer_id"=>$this->customerID,
                 "customer_name" =>$this->customerName,
                 "customer_number" =>$this->customerPhone,
                 "staff_id"=>$this->staff_id,
@@ -147,7 +206,6 @@ class VaskatBill extends Component
             $vaskateID->NeckContainer->where("clothing_type","vasket")->first()->delete();
             $vaskateID->NeckContainer->where("clothing_type","vasket")->first()->delete();
             $vaskateID->SkirtContainer->where("clothing_type","vasket")->first()->delete();
-            $vaskateID->Customer->delete();
             $vaskateID->delete();
             $this->resetPage();
         }catch(Exception $ex){
@@ -155,9 +213,6 @@ class VaskatBill extends Component
         }
         
     }
-
-     
-
 
     #[On("refreshPageVasket")]
     public function refreshPage(){
@@ -177,10 +232,10 @@ class VaskatBill extends Component
             ]);
         }else{
             return view('livewire.vaskat-bill',[
-                'Vaskates'=>Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->latest()->paginate(50),
-                'totalRecord'=>Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->count(),
-                'totalCash' => Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('paid'),
-                'totalBalance'=>Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("id","like", "$this->query")->sum('balance')
+                'Vaskates'=>Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->latest()->paginate(50),
+                'totalRecord'=>Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->count(),
+                'totalCash' => Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('paid'),
+                'totalBalance'=>Vaskates::where("customer_number","like","$this->query%")->orWhere("customer_name","like", "%$this->query%")->orWhere("customer_id","like", "$this->query")->sum('balance')
             ]);
         }
     }

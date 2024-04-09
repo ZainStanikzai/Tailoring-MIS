@@ -446,6 +446,18 @@
                                                                 foreach ($custommer->Cloth as $value) {
                                                                    $totalBalance += $value->balance;
                                                                 }
+                                                                foreach ($custommer->Vaskate as $value) {
+                                                                   $totalBalance += $value->balance;
+                                                                }
+                                                                foreach ($custommer->Coat as $value) {
+                                                                   $totalBalance += $value->balance;
+                                                                }
+                                                                foreach ($custommer->Panth as $value) {
+                                                                   $totalBalance += $value->balance;
+                                                                }
+                                                                foreach ($custommer->Tshirt as $value) {
+                                                                   $totalBalance += $value->balance;
+                                                                }
                                                                 if($totalBalance != 0){
                                                                     echo "<span class='text-danger'>$totalBalance</span>";
                                                                 }else{

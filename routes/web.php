@@ -3,6 +3,7 @@
 use App\Models\Cloth;
 use App\Models\Customer;
 use App\Models\Staff;
+use App\Models\Vaskates;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -40,12 +41,10 @@ Route::middleware('auth')->group(function () {
 Route::get('/login', App\Livewire\Login::class)->name('login')->middleware('guest');
 
 Route::get("/test" , function(){
-    $customer = Customer::find(4);
-    $ids = 0;
-    foreach ($customer->Cloth as $value) {
-        $ids .= "$value->id";
-    }
-    return  $ids;
+    $vas = Vaskates::find(3);
+    
+   
+    return  $vas->NeckContainer->where("clothing_type", "vasket")->first();
     // if($customer==0){
     //     return "its null".$customer;
     // }else{

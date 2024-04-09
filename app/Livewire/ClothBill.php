@@ -277,7 +277,6 @@ class ClothBill extends Component
             $id->ShoulderStyleContainer->where("clothing_type","cloth")->first()->delete();
             $id->SleeveStyleContainer->where("clothing_type","cloth")->first()->delete();
             $id->delete();
-            $id->delete();
             $this->resetPage();
         }catch(Exception $ex){
             session()->flash("error",$ex);

@@ -19,5 +19,11 @@ class Customer extends Model
     protected function Coat(){
         return $this->hasMany(Coat::class,'customer_id');
     }
+    protected function Panth(){
+        return $this->hasMany(Panth::class,'customer_id');
+    }
+    protected function Tshirt(){
+        return $this->hasMany(Tshirt::class,'customer_id');
+    }
     use HasFactory;
 }
