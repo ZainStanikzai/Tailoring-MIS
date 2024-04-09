@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $table = 'customers';
-    protected $fillable = ['name','numbers',];
+    protected $fillable = ['id','name','numbers',];
 
     protected function Vaskate(){
         return $this->hasMany(Vaskates::class,"customer_id");

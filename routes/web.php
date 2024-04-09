@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Cloth;
+use App\Models\Customer;
 use App\Models\Staff;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +40,16 @@ Route::middleware('auth')->group(function () {
 Route::get('/login', App\Livewire\Login::class)->name('login')->middleware('guest');
 
 Route::get("/test" , function(){
-    $staff = Staff::find(6);
-    return $staff->Salary->sum("amount");
+    $customer = Customer::find(4);
+    $ids = 0;
+    foreach ($customer->Cloth as $value) {
+        $ids .= "$value->id";
+    }
+    return  $ids;
+    // if($customer==0){
+    //     return "its null".$customer;
+    // }else{
+    //     return "its not null".$customer;
+    // }
+   
 });

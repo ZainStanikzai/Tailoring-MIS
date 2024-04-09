@@ -2181,6 +2181,19 @@ body[data-layout=horizontal][data-layout-size=boxed] .container-fluid, body[data
 }
 
 @media print {
+  .modal select{
+    appearance: none;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    
+    
+  }
+  /* input[type='text'],input[type='number'],.modal select , textarea{
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  } */
   .vertical-menu,
   .right-bar,
   .page-title-box,

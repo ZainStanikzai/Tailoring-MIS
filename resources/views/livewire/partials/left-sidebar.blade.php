@@ -54,12 +54,12 @@
                        
                     </ul>
                 </li>
-                {{-- <li>
+                <li>
                     <a href="{{ route('page.customer') }}" wire:navigate.hover  class="waves-effect">
                         <i class="uil-users-alt"></i>
                         <span>مشتریان</span>
                     </a>
-                </li> --}}
+                </li>
                 <li>
                     <a href="{{ route('page.staff') }}" wire:navigate.hover class="waves-effect">
                         <i class="uil-user-arrows"></i>
