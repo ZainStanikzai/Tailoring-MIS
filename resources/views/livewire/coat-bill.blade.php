@@ -114,8 +114,11 @@
                                             <div class="col-lg-12 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <div class="position-absolute" style="left: 10px;top:0">Bill
-                                                            :{{ $lastID }}
+                                                        <div class="position-absolute d-flex flex-col-reverse" style="left: 10px;top:0"><div class="mx-2"><input
+                                                            wire:keydown.enter='searchForCustomer($event.target.value)'
+                                                            type="text" class="text-center"
+                                                            style="width: 100px;height: 15px;border:none;outline: none; border-bottom:1px solid grey" />:C-ID|Number
+                                                    </div>Bill:{{ $lastID }}
                                                         </div>
                                                         <div class="invoice-title">
                                                             <div style="left: 10px;top:0"
@@ -143,7 +146,7 @@
                                                             <div style="left:-20px;top:20px"
                                                                 class="mt-4 position-absolute  d-flex align-items-baseline justify-content-end">
                                                                 <h5 class="font-size-16 mb-1">انتها تاریخ </h5>
-                                                                <input type="date"
+                                                                <input type="date" {{$customerID == "" ? "disabled" : ""}}
                                                                     class="border-0 bg-transparent shadow-none"
                                                                     name="" wire:model='sewDate' id="date"
                                                                     required>
@@ -153,12 +156,12 @@
                                                                 <label class="form-label me-2" style=""
                                                                     for="validationCustom02">
                                                                     خیاط</label>
-                                                                <select name="" required
+                                                                <select {{$customerID == "" ? "disabled" : ""}} name="" required
                                                                     class="w-100 border border-1 bg-transparent"
                                                                     id="selectStaff" wire:model='staff_id' required>
-                                                                    <option value="-1"></option>
+                                                                    <option value=""></option>
                                                                     @foreach ($staffs as $staff)
-                                                                        <option value="{{ $staff->id }}">
+                                                                        <option  {{$staff_id == $staff->id ? "selected" : ""}} value="{{ $staff->id }}">
                                                                             {{ $staff->name }}</option>
                                                                     @endforeach
                                                                 </select>
@@ -179,7 +182,7 @@
                                                                                         <label class="form-label"
                                                                                             style="width: 40px"
                                                                                             for="validationCustom01">نوم</label>
-                                                                                        <input type="text"
+                                                                                        <input {{$customerID == "" ? "disabled" : ""}} type="text"
                                                                                             min="1"
                                                                                             wire:model='customerName'
                                                                                             class="form-control border w-100"
@@ -196,7 +199,7 @@
                                                                                         <label class="form-label"
                                                                                             style="width: 40px"
                                                                                             for="validationCustom01">مبایل</label>
-                                                                                        <input type="number"
+                                                                                        <input {{$customerID == "" ? "disabled" : ""}} type="number"
                                                                                             min="0700000000"
                                                                                             wire:model='customerPhone'
                                                                                             max="0799999999"
@@ -217,7 +220,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">قد</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='height'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -226,7 +229,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">شانه</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='shoulder'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -235,7 +238,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">آستین</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='sleeve'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -244,7 +247,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">بغل</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='side'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -253,7 +256,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">کمر</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='waist'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -262,7 +265,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">سورین</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='surren'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -271,7 +274,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">کراسب</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='crossSub'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -280,7 +283,7 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 50px"
                                                                             for="validationCustom01">کراس</label>
-                                                                        <input step="any" type="number" min="1"
+                                                                        <input {{$customerID == "" ? "disabled" : ""}} step="any" type="number" min="1"
                                                                             max="150" wire:model='cross'
                                                                             class="form-control p-1"
                                                                             id="validationCustom01" placeholder="00"
@@ -291,13 +294,13 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width:100px"
                                                                             for="validationCustom02">دامن</label>
-                                                                        <select required name=""
+                                                                        <select {{$customerID == "" ? "disabled" : ""}} required name=""
                                                                             wire:model='skirtStyle_id'
                                                                             class="w-100  border border-light "
                                                                             id="">
-                                                                            <option value="-1"></option>
+                                                                            <option value=""></option>
                                                                             @foreach ($skirtStyles as $skirt)
-                                                                                <option value="{{ $skirt->id }}">
+                                                                                <option {{$skirtStyle_id == $skirt->id ? "selected" : ""}} value="{{ $skirt->id }}">
                                                                                     {{ $skirt->name }}</option>
                                                                             @endforeach
                                                                         </select>
@@ -309,13 +312,13 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 100px"
                                                                             for="validationCustom02">یخن</label>
-                                                                        <select required name=""
+                                                                        <select {{$customerID == "" ? "disabled" : ""}} required name=""
                                                                             wire:model='neckStyle_id'
                                                                             class="w-100  border border-light "
                                                                             id="">
-                                                                            <option value="-1"></option>
+                                                                            <option value=""></option>
                                                                             @foreach ($neckStyles as $neck)
-                                                                                <option value="{{ $neck->id }}">
+                                                                                <option {{$neckStyle_id == $neck->id ? "selected" : ""}} value="{{ $neck->id }}">
                                                                                     {{ $neck->name }}</option>
                                                                             @endforeach
                                                                         </select>
@@ -327,13 +330,13 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width: 100px"
                                                                             for="validationCustom02">یخن_سب</label>
-                                                                        <select required name=""
+                                                                        <select {{$customerID == "" ? "disabled" : ""}} required name=""
                                                                             wire:model='neckSubStyle_id'
                                                                             class="w-100  border border-light "
                                                                             id="">
-                                                                            <option value="-1"></option>
+                                                                            <option value=""></option>
                                                                             @foreach ($neckSubStyles as $neckSub)
-                                                                                <option value="{{ $neckSub->id }}">
+                                                                                <option {{$neckSubStyle_id == $neckSub->id ? "selected" : ""}} value="{{ $neckSub->id }}">
                                                                                     {{ $neckSub->name }}</option>
                                                                             @endforeach
                                                                         </select>
@@ -345,13 +348,13 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width:100px"
                                                                             for="validationCustom02">پشت</label>
-                                                                        <select required name=""
+                                                                        <select {{$customerID == "" ? "disabled" : ""}} required name=""
                                                                             wire:model='backStyle_id'
                                                                             class="w-100  border border-light "
                                                                             id="">
-                                                                            <option value="-1"></option>
+                                                                            <option value=""></option>
                                                                             @foreach ($backStyles as $back)
-                                                                                <option value="{{ $back->id }}">
+                                                                                <option {{$backStyle_id == $back->id ? "selected" : ""}} value="{{ $back->id }}">
                                                                                     {{ $back->name }}</option>
                                                                             @endforeach
                                                                         </select>
@@ -363,13 +366,13 @@
                                                                     <div class="d-flex align-items-baseline ">
                                                                         <label class="form-label" style="width:100px"
                                                                             for="validationCustom02">شانه</label>
-                                                                        <select required name=""
+                                                                        <select {{$customerID == "" ? "disabled" : ""}} required name=""
                                                                             wire:model='shoulderStyle_id'
                                                                             class="w-100  border border-light "
                                                                             id="">
-                                                                            <option value="-1"></option>
+                                                                            <option  value=""></option>
                                                                             @foreach ($shoulderStyles as $shoulder)
-                                                                                <option value="{{ $shoulder->id }}">
+                                                                                <option {{$shoulderStyle_id == $shoulder->id ? "selected" : ""}} value="{{ $shoulder->id }}">
                                                                                     {{ $shoulder->name }}</option>
                                                                             @endforeach
                                                                         </select>
@@ -393,7 +396,7 @@
                                                                     class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="txtQty">تعداد</label>
-                                                                    <input type="number" min="0"
+                                                                    <input {{$customerID == "" ? "disabled" : ""}} type="number" min="0"
                                                                         class="form-control p-1 border-0"
                                                                         id="txtQty" placeholder="00" required
                                                                         wire:model='qty'>
@@ -402,7 +405,7 @@
                                                                     class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="txtPrice">نرخ</label>
-                                                                    <input type="number" min="0"
+                                                                    <input {{$customerID == "" ? "disabled" : ""}} type="number" min="0"
                                                                         class="form-control p-1 border-0"
                                                                         id="txtPrice" placeholder="00" required
                                                                         wire:model='price'>
@@ -411,7 +414,7 @@
                                                                     class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="txtRakht">رخت</label>
-                                                                    <input type="number" min="0"
+                                                                    <input {{$customerID == "" ? "disabled" : ""}} type="number" min="0"
                                                                         class="form-control p-1 border-0"
                                                                         id="txtRakht" placeholder="00"
                                                                         wire:model='rakht'>
@@ -429,7 +432,7 @@
                                                                     class="mr-1 d-flex align-items-baseline col-md-4 col-sm-4 col-4 float-right">
                                                                     <label class="form-label" style="width: 50px"
                                                                         for="txtAdvance">پیشکی</label>
-                                                                    <input type="number" min="0"
+                                                                    <input {{$customerID == "" ? "disabled" : ""}} type="number" min="0"
                                                                         class="form-control p-1 border-0"
                                                                         id="txtAdvance" wire:model='paid'
                                                                         placeholder="00">
@@ -453,7 +456,7 @@
                                     </div>
                                     <div class="modal-footer">
 
-                                        <input type="submit" class="btn btn-primary" form="formBillAdd"
+                                        <input type="submit" {{$customerID == "" ? "disabled" : ""}} class="btn btn-primary" form="formBillAdd"
                                             value="ذخیره یی کړی" />
                                         <a href="javascript:window.print()"
                                             class="btn btn-success waves-effect waves-light me-1"><i
@@ -472,9 +475,11 @@
 
                                     <tr class="text-bold">
                                         <th>#</th>
+                                        <th>مشتری ID</th>
                                         <th>نوم</th>
                                         <th>نمبر</th>
                                         <th>تاریخ</th>
+                                        <th>حالت</th>
                                         <th>یوی جوری قیمت</th>
                                         <th>رخت قیت</th>
                                         <th>ټول قیمت</th>
@@ -487,9 +492,13 @@
                                     @foreach ($Coats as $coat)
                                     <tr id="coat_{{ $coat->id }}" wire:key='coat_{{ $coat->id }}'>
                                         <td>{{ $coat->id }}</td>
+                                        <td>{{ $coat->customer_id }}</td>
                                         <td>{{ $coat->customer_name }}</td>
                                         <td>{{ $coat->customer_number }}</td>
-                                        <td>{{ $coat->sewDate }}</td>
+                                        <td>{{ $coat->created_at->format('Y-m-d') }}</td>
+                                        <td
+                                                class="font-weight-bold {{ $coat->sewStatus == 0 ? 'text-danger' : 'text-primary' }}">
+                                                {{ $coat->sewStatus == 0 ? 'ندی ګنډل شوی' : 'ګنډل شوی' }}</td>
                                         <td>{{ $coat->price }}</td>
                                         <td>{{ $coat->rakht }}</td>
                                         <td>{{ $coat->price * $coat->qty + $coat->rakht }}</td>

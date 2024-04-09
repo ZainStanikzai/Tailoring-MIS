@@ -48,6 +48,26 @@ class Customer extends Component
                    $value->customer_number = $this->phone;
                    $value->save();
                 }
+                foreach ($newcustomer->Vaskate as $value) {
+                    $value->customer_name = $this->name;
+                    $value->customer_number = $this->phone;
+                    $value->save();
+                 }
+                foreach ($newcustomer->Coat as $value) {
+                    $value->customer_name = $this->name;
+                    $value->customer_number = $this->phone;
+                    $value->save();
+                 }
+                 foreach ($newcustomer->Panth as $value) {
+                    $value->customer_name = $this->name;
+                    $value->customer_number = $this->phone;
+                    $value->save();
+                 }
+                 foreach ($newcustomer->Tshirt as $value) {
+                    $value->customer_name = $this->name;
+                    $value->customer_number = $this->phone;
+                    $value->save();
+                 }
                 $newcustomer->save();
                 session()->flash("success","updated");
                 $this->id="";

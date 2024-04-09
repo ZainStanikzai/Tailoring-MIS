@@ -58,22 +58,77 @@ class CoatBill extends Component
     public $balance = 0;
     public $description;
 
-    #[Validate('required',message:"کارکوونکی انتخاب کری.")]
+    // #[Validate('required',message:"کارکوونکی انتخاب کری.")]
     public $staff_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $neckSubStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $neckStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $backStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $skirtStyle_id;
-    #[Validate('required',message:"ستایل انتخاب کری.")]
+    // #[Validate('required',message:"ستایل انتخاب کری.")]
     public $shoulderStyle_id;
 
 
     public $modelClass;
     public $modelStyle;
+
+
+    public $customerID;
+    public function searchForCustomer($val){
+       
+        $customer = Customer::where("id",$val)->orWhere("numbers",$val)->first();
+        if(!empty($customer)){
+            $this->reset();
+            $this->initData();
+            $this->customerID = $val;
+            $InfoID = Coat::where("customer_id",$val)->orWhere("customer_number",$val)->first();
+            $this->customerName = $customer->name;
+            $this->customerPhone = $customer->numbers;           
+            if(!empty($InfoID)){
+                $this->lastID = $InfoID->id;
+                $this->staff_id = $InfoID->staff_id;
+                $this->height = $InfoID->height;
+                $this->shoulder = $InfoID->shoulder;
+                $this->sleeve = $InfoID->sleeve;
+                $this->side = $InfoID->side;
+                $this->waist = $InfoID->waist;
+                $this->surren = $InfoID->sourin;
+                $this->cross = $InfoID->cross;
+                $this->crossSub = $InfoID->crossBig;
+                $this->neckSubStyle_id = $InfoID->neckSubStyle_id;
+                $this->backStyle_id = $InfoID->backStyle_id;
+                try {
+                    $this->neckStyle_id = Neck::find($InfoID->NeckStyleContainer->where("clothing_type", "coat")->first()->neck_id)->id;
+                } catch (Exception) {
+                    $this->neckStyle_id = "";
+                }
+                try {
+                    $this->skirtStyle_id = Skirt::find($InfoID->SkirtStyleContainer->where("clothing_type", "coat")->first()->skirt_id)->id;
+                } catch (Exception) {
+                    $this->skirtStyle_id = "";
+                }
+                try {
+                    $this->shoulderStyle_id = Shoulder::find($InfoID->ShoulderStyleContainer->where("clothing_type", "coat")->first()->shoulder_id)->id;
+                } catch (Exception) {
+                    $this->shoulderStyle_id = "";
+                }
+            }else{
+                $this->lastID = 1;
+            }
+        }else{
+            session()->flash("error","په دی نمبر مشتری وجود نلری."); 
+            $this->reset();
+            $this->initData();  
+        }
+        $this->modelClass = "show";
+        $this->modelStyle = "display: block;";
+        $this->resetPage();
+       
+        
+    }
 
     public function initData(){
       
@@ -102,9 +157,8 @@ class CoatBill extends Component
 
         try {
             DB::beginTransaction();
-            $newCustomer = Customer::create(['name'=>$this->customerName, 'numbers'=>$this->customerPhone]);
             $newRecord = Coat::create([
-                "customer_id"=>$newCustomer->id,
+                "customer_id"=>$this->customerID,
                 "customer_name" =>$this->customerName,
                 "customer_number" =>$this->customerPhone,
                 "staff_id"=>$this->staff_id,
@@ -157,7 +211,6 @@ class CoatBill extends Component
             $id->NeckStyleContainer->where("clothing_type","coat")->first()->delete();
             $id->SkirtStyleContainer->where("clothing_type","coat")->first()->delete();
             $id->ShoulderStyleContainer->where("clothing_type","coat")->first()->delete();
-            $id->Customer->delete();
             $id->delete();
             DB::commit();
             $this->resetPage();

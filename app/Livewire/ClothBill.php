@@ -112,6 +112,7 @@ class ClothBill extends Component
         }else{
             $this->reset();
             $this->initData();  
+            session()->flash("error","په دی نمبر مشتری وجود نلری."); 
         }
         $this->modelClass = "show";
         $this->modelStyle = "display: block;";
